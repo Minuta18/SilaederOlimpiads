@@ -1,0 +1,24 @@
+label {
+    text-align: start;
+    display: block;
+    margin: 4px;  
+}
+
+input {
+    display: block;
+    padding-left: auto;
+    padding-right: auto;
+    width: 97%;
+    height: 20px;  
+    margin: 4px;  
+}
+
+input[type="submit"] {
+    display: block;
+    margin: 4px;
+    background-color: #ffae00;
+    border: 1px solid #ffae00;
+    color: #f1f1f1;
+    height: 20px;
+    width: 99%;
+}

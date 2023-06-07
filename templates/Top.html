@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <title>Топ учеников</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='style/Main.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style/Navbar.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style/Container.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style/Table.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style/Forms.css') }}" type="text/css">        
+	</head>
+	<body>
+        <div class="navbar">
+            <a href="/">Главная</a>
+            <a href="/register">Регистрация</a>
+            <a href="/top" class="active">Топ учеников</a>
+            <a href="https://docs.google.com/spreadsheets/d/17bsx0wYd9wtbvp8splCud6oiYWkyCLudZJbsXD_sN4g/edit#gid=1160036369">Олимпиады</a>
+        </div>
+
+        <div class="top-table">
+            <table>
+                <thead>
+                    <tr>
+                        <td scope="col">ФИО</td>
+                        <td scope="col">Класс</td>
+                        <td scope="col">Очки</td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+	</body>
+</html>

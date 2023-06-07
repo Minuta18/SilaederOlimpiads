@@ -1,0 +1,20 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif, arial, helvetica;
+}
+
+.text {
+    font-size: medium;
+    padding: 8px;
+}
+
+.header-text {
+    font-size: larger;
+    font-weight: bold;
+    padding: 8px;
+}
+
+.accent {
+    color: #ffae00;
+}

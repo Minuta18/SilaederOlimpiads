@@ -1,0 +1,27 @@
+.container {
+    padding: 16px;
+    background-color: #f1f1f1;
+    text-align: center;
+}
+
+.centered-container {
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 5%;
+    padding: 16px;
+    background-color: #f1f1f1;
+    text-align: center;
+    display: block;
+    width: 50%;
+}
+
+.form-container {
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 5%;
+    background-color: #f1f1f1;
+    text-align: center;
+    display: block;
+    width: 30%;
+    padding: 16px;
+}

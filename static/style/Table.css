@@ -1,0 +1,34 @@
+.top-table {
+    margin-top: 5%;
+    font-size: medium;
+    text-align: center;
+}
+
+.top-table table {
+    margin-left: auto;
+    margin-right: auto;
+    table-layout: fixed;
+    width: 80%;
+    border-collapse: collapse;
+    border: 1px solid white;
+}
+
+.top-table thead {
+    background-color: #ffae00;
+    color: #f1f1f1;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.top-table tbody tr:nth-child(odd) {
+    background-color: #f1f1f1;
+}
+
+.top-table tbody tr:nth-child(even) {
+    background-color: #d9d9d9;
+}
+
+.top-table td {
+    padding: 16px;
+    word-wrap: break-word;
+}
