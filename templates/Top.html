@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='style/Navbar.css') }}" type="text/css">
         <link rel="stylesheet" href="{{ url_for('static', filename='style/Container.css') }}" type="text/css">
         <link rel="stylesheet" href="{{ url_for('static', filename='style/Table.css') }}" type="text/css">
-        <link rel="stylesheet" href="{{ url_for('static', filename='style/Forms.css') }}" type="text/css">        
+        <link rel="stylesheet" href="{{ url_for('static', filename='style/Forms.css') }}" type="text/css">
 	</head>
 	<body>
         <div class="navbar">
@@ -26,7 +26,7 @@
                     </tr>
                 </thead>
                 <tbody>
-
+                    {{top|safe}}
                 </tbody>
             </table>
         </div>
