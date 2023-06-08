@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <title>Регистрация</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style/Main.css') }}" type="text/css">
+		<link rel="stylesheet" href="{{ url_for('static', filename='style/Index.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style/Container.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style/Table.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style/Forms.css') }}" type="text/css">        
+	</head>
+    <body>
+        <div class="navbar">
+            <a href="/">Главная</a>
+            <a href="/register" class="active">Регистрация</a>
+            <a href="/top">Топ учеников</a>
+            <a href="https://docs.google.com/spreadsheets/d/17bsx0wYd9wtbvp8splCud6oiYWkyCLudZJbsXD_sN4g/edit#gid=1160036369">Олимпиады</a>
+        </div>
+
+        <div class="form-container">
+            <form action="/reg_next" method="post">
+                <label for="familiya">Фамилия ученика</label>
+                <input type="text" name="familiya">
+                <label for="name">Имя ученика</label>
+                <input type="text" name="name">
+                <label for="otchestvo">Отчество ученика</label>
+                <input type="text" name="otchestvo">
+                <label for="classes">Класс ученика</label>
+                <input list="classes" name="class">
+                <datalist id="classes">
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                </datalist>
+                <label for="olimpiadas">Олимпиада</label>
+                <input list="olimpiadas" name="olimps">
+                <datalist id="olimpiadas"><option value="МОШ Генетика: побед-50, приз-25, участник-5"></option><option value="МОШ робототехника: побед-50, приз-25, участник-5"></option><option value="МОШ информатика: побед-50, приз-25, участник-5"></option><option value="МОШ математика: побед-50, приз-25, участник-5"></option><option value="МОШ Матпраздник: побед-50, приз-25, участник-5"></option><option value="МОШ Физика: побед-50, приз-25, участник-5"></option><option value="МОШ Биология: побед-50, приз-25, участник-5"></option><option value="Национальная технологическая олимпиада Информатика: побед-40, приз-20, участник-5"></option><option value="Национальная технологическая олимпиада Математика: побед-40, приз-20, участник-5"></option><option value="Национальная технологическая олимпиада Физика: побед-40, приз-20, участник-5"></option><option value="Национальная технологическая олимпиада Биология: побед-40, приз-20, участник-5"></option><option value="Национальная технологическая олимпиада География: побед-40, приз-20, участник-5"></option><option value="Национальная технологическая олимпиада Обществознание: побед-40, приз-20, участник-5"></option><option value="Национальная технологическая олимпиада Химия: побед-40, приз-20, участник-5"></option><option value="Формула Единства Математика: побед-30, приз-15, участник-5"></option><option value="Формула Единства Физика: побед-30, приз-15, участник-5"></option><option value="Формула Единства Английский язык: побед-30, приз-15, участник-5"></option><option value="Технокубок(МФТИ) Информатика: побед-40, приз-20, участник-5"></option><option value="олимпиада Эйлера Математика: побед-50, приз-25, участник-5"></option><option value="Высшая проба Иностранные языки: побед-50, приз-25, участник-5"></option><option value="Высшая проба История: побед-50, приз-25, участник-5"></option><option value="Высшая проба Математика: побед-50, приз-25, участник-5"></option><option value="Высшая проба Русский язык: побед-50, приз-25, участник-5"></option><option value="Высшая проба Филология: побед-50, приз-25, участник-5"></option><option value="Высшая проба Финансовая грамотность: побед-50, приз-25, участник-5"></option><option value="Высшая проба Обществознание: побед-50, приз-25, участник-5"></option><option value="Высшая проба Экономика: побед-50, приз-25, участник-5"></option><option value="Высшая проба Биология: побед-50, приз-25, участник-5"></option><option value="Высшая проба Востоковедение: побед-50, приз-25, участник-5"></option><option value="Высшая проба Восточные языки: побед-50, приз-25, участник-5"></option><option value="Высшая проба География: побед-50, приз-25, участник-5"></option><option value="Высшая проба Дизайн: побед-50, приз-25, участник-5"></option><option value="Высшая проба Журналистика: побед-50, приз-25, участник-5"></option><option value="Высшая проба Инженерные науки: побед-50, приз-25, участник-5"></option><option value="Высшая проба Информатика: побед-50, приз-25, участник-5"></option><option value="Высшая проба История мировых цивилизаций: побед-50, приз-25, участник-5"></option><option value="Высшая проба Культурология: побед-50, приз-25, участник-5"></option><option value="Высшая проба Международные отношения: побед-50, приз-25, участник-5"></option><option value="Высшая проба Основы бизнеса: побед-50, приз-25, участник-5"></option><option value="Высшая проба Политология: побед-50, приз-25, участник-5"></option><option value="Высшая проба Право: побед-50, приз-25, участник-5"></option><option value="Высшая проба Психология: побед-50, приз-25, участник-5"></option><option value="Высшая проба Социология: побед-50, приз-25, участник-5"></option><option value="Высшая проба Физика: побед-50, приз-25, участник-5"></option><option value="Высшая проба Философия: побед-50, приз-25, участник-5"></option><option value="Высшая проба Химия: побед-50, приз-25, участник-5"></option><option value="Отраслевая физико-математическая олимпиада школьников " Росатом'="" Физика:="" побед-40,="" приз-20,="" участник-5'=""></option><option value="Отраслевая физико-математическая олимпиада школьников " Росатом'="" Математика:="" побед-40,="" приз-20,="" участник-5'=""></option><option value="Балтийский научно-инженерный конкурс математике: побед-50, приз-25, участник-5"></option><option value="Балтийский научно-инженерный конкурс физике: побед-50, приз-25, участник-5"></option><option value="Балтийский научно-инженерный конкурс химии: побед-50, приз-25, участник-5"></option><option value="Балтийский научно-инженерный конкурс технике: побед-50, приз-25, участник-5"></option><option value="Балтийский научно-инженерный конкурс физиологии: побед-50, приз-25, участник-5"></option><option value="Балтийский научно-инженерный конкурс медицине: побед-50, приз-25, участник-5"></option><option value="Балтийский научно-инженерный конкурс биологии: побед-50, приз-25, участник-5"></option><option value="Балтийский научно-инженерный конкурс программированию: побед-50, приз-25, участник-5"></option><option value="Балтийский научно-инженерный конкурс робототехнике: побед-50, приз-25, участник-5"></option><option value="ВсОШ английский язык: побед-100, приз-50, участник-5"></option><option value="ВсОШ астрономия: побед-100, приз-50, участник-5"></option><option value="ВсОШ биология: побед-100, приз-50, участник-5"></option><option value="ВсОШ география: побед-100, приз-50, участник-5"></option><option value="ВсОШ информатика: побед-100, приз-50, участник-5"></option><option value="ВсОШ испанский язык: побед-100, приз-50, участник-5"></option><option value="ВсОШ история: побед-100, приз-50, участник-5"></option><option value="ВсОШ итальянский язык: побед-100, приз-50, участник-5"></option><option value="ВсОШ китайский язык: побед-100, приз-50, участник-5"></option><option value="ВсОШ литература: побед-100, приз-50, участник-5"></option><option value="ВсОШ математика: побед-100, приз-50, участник-5"></option><option value="ВсОШ МХК: побед-100, приз-50, участник-5"></option><option value="ВсОШ немецкий язык: побед-100, приз-50, участник-5"></option><option value="ВсОШ ОБЖ: побед-100, приз-50, участник-5"></option><option value="ВсОШ обществознание: побед-100, приз-50, участник-5"></option><option value="ВсОШ право: побед-100, приз-50, участник-5"></option><option value="ВсОШ русский язык: побед-100, приз-50, участник-5"></option><option value="ВсОШ технология: побед-100, приз-50, участник-5"></option><option value="ВсОШ физика: побед-100, приз-50, участник-5"></option><option value="ВсОШ физическая культура, : побед-100, приз-50, участник-5"></option><option value="ВсОШ французский язык: побед-100, приз-50, участник-5"></option><option value="ВсОШ экология: побед-100, приз-50, участник-5"></option><option value="ВсОШ экономика: побед-100, приз-50, участник-5"></option><option value="ВсОШ химия: побед-100, приз-50, участник-5"></option></datalist> <!--<option value="5">-->        
+                <label for="place">Победитель/Призёр/Участник</label> 
+                <input list="place" name="place">
+                <datalist id="place"><option value="Победитель"></option><option value="Призёр"></option><option value="Участник"></option></datalist>
+                <input type="submit">
+            </form>
+        </div>
+ <!-- <p>Не нашли свою олимпиаду? Напишите нам -&gt; <a href="https://t.me/Margo_lbd">Наш ТГ</a></p> -->
+    
+    </body>
+</html>
