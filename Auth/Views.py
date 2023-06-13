@@ -1,9 +1,10 @@
-from Init import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import Flask, render_template, request, redirect
 from flask_login import login_user, login_required, logout_user
+from Init import db
 from .Models import User
 from Init import app
+from .Permissions import Permissions
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
@@ -21,7 +22,7 @@ def login():
 
         login_user(user)
         return redirect('/')
-    return render_template('Login.html', code=0)
+    return render_template('auth/Login.html', code=0)
 
 @app.route('/register/', methods=['GET', 'POST'])
 def register():
@@ -35,10 +36,10 @@ def register():
         password_confirmation = request.form.get('password_confirmation')
 
         if password != password_confirmation:
-            return render_template('Register.html', code=1)
+            return render_template('auth/Register.html', code=1)
         
         if False: # TODO: add validation if user is not in silaeder
-            return render_template('Register.html', code=2)
+            return render_template('auth/Register.html', code=2)
 
         new_user = User(
             email=email,
@@ -46,7 +47,8 @@ def register():
             last_name=surname,
             middle_name=midname,
             klass=klass,
-            password_hashed=generate_password_hash(password, method='sha256')
+            password_hashed=generate_password_hash(password, method='scrypt'),
+            permissions=Permissions.admin.value,
         )
 
         db.session.add(new_user)
@@ -54,7 +56,7 @@ def register():
         login_user(new_user)
 
         return redirect('/')
-    return render_template('Register.html', code=0)
+    return render_template('auth/Register.html', code=0)
 
 @login_required
 @app.route('/logout/', methods=['GET'])
