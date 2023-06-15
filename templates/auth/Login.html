@@ -1,7 +1,28 @@
-<form method="post">
-    <input type="text" placeholder="email" name="email">
-    <input type="text" placeholder="password" name="password">
-    <input type="submit">
-</form>
+{% extends "init/Base.html" %}
 
-{{ code }}
+{% block title %}Вход - Силаэдр олимпиады{% endblock %}
+
+{% block navbar %}
+    <div class="navbar">
+        <a href="/">Силаэдр олипиады</a>
+        <a href="/register" style="float: right" class="active">Вход</a>
+        <a href="/login" style="float: right">Регистрация</a>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <form method="post">
+        <label><h1>Вход</h1></label>
+        {% if code == 1 %}
+            <label class="danger">Пользователь не найден</label>
+        {% endif %}
+        {% if code == 2 %}
+            <label class="danger">Пароли не совпадают</label>
+        {% endif %}
+        <input type="text" placeholder="почта" name="email" value="{{ email }}" required>
+        <input type="password" placeholder="пароль" name="password" value="{{ passw }}" required>
+        <input type="submit" value="Вход">
+    </form>
+</div>
+{% endblock %}
