@@ -1,0 +1,19 @@
+{% extends "init/Base.html" %}
+
+{% block title %}Ошибка - Силаэдр олимпиады{% endblock %}
+
+{% block navbar %}
+    <div class="navbar">
+        <a href="/">Силаэдр олипиады</a>
+        <a href="/add">Добавить олимпиаду</a>
+        <a href="/leaderboard">Таблица лидеров</a>
+        <a href="/user/{{ usr.id }}" style="float: right">Мой аккаунт</a>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="centered-container">
+        <h1 class="header-text">Произошла ошибка</h1>
+        <p class="hidden-text">код: {{ error_code }}</p>
+    </div>
+{% endblock %}

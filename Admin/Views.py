@@ -27,9 +27,18 @@ def add_olimp():
     if request.method == 'POST':
         name = request.form.get('name')
         desc = request.form.get('desc')
+        pfw = request.form.get('pfw')
+        pfp = request.form.get('pfp')
+        pfm = request.form.get('pfm')
 
         try:
-            new_olimp = Olimp(name=name, description=desc)
+            new_olimp = Olimp(
+                name=name, 
+                description=desc,
+                points_for_win=pfw,
+                points_for_prize=pfp,
+                points_for_member=pfm,
+            )
 
             db.session.add(new_olimp)
             db.session.commit()

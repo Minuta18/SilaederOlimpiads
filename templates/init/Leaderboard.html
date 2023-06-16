@@ -1,0 +1,43 @@
+{% extends "init/Base.html" %}
+
+{% block title %}{{ username }} - Силаэдр олимпиады{% endblock %}
+
+{% block navbar %}
+    {% if usr.is_authenticated %}
+        <div class="navbar">
+            <a href="/">Силаэдр олипиады</a>
+            <a href="/add">Добавить олимпиаду</a>
+            <a href="/leaderboard" class="active">Таблица лидеров</a>
+            <a href="/user/{{ usr.id }}" style="float: right">Мой аккаунт</a>
+        </div>
+    {% else %}
+        <div class="navbar">
+            <a href="/">Силаэдр олипиады</a>
+            <a href="/login" style="float: right" class="active">Вход</a>
+            <a href="/register" style="float: right">Регистрация</a>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="top-table">
+        <table>
+            <thead>
+                <tr>
+                    <td scope="col">Место</td>
+                    <td scope="col">Пользователь</td>
+                    <td scope="col">Очки</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.place }}</td>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.points }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

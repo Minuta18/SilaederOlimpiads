@@ -13,7 +13,7 @@ def add_olimp_for_user():
     if request.method == 'POST':
         olimp = request.form.get('olimp')
         date_ = request.form.get('date')
-        place = request.form.get('place')
+        place = int(request.form.get('place'))
 
         olimp = Olimp.query.filter_by(name=olimp).first()
         if not olimp:
@@ -33,6 +33,14 @@ def add_olimp_for_user():
             created_at=datetime.strptime(date_, '%Y-%m-%d'),
             place=place,
         )
+
+        if place == 0:
+            current_user.points += olimp.points_for_win
+        elif place == 1:
+            current_user.points += olimp.points_for_prize
+        elif place == 2:
+            current_user.points += olimp.points_for_member
+
         db.session.add(new_olimp)
         db.session.commit()
 

@@ -1,12 +1,12 @@
 {% extends "init/Base.html" %}
 
-{% block title %}Регистрация - Силаэдр олимпиады{% endblock %}
+{% block title %}Таблица лидеров - Силаэдр олимпиады{% endblock %}
 
 {% block navbar %}
     <div class="navbar">
         <a href="/">Силаэдр олипиады</a>
-        <a href="/login" style="float: right" class="active">Вход</a>
-        <a href="/register" style="float: right">Регистрация</a>
+        <a href="/login" style="float: right">Вход</a>
+        <a href="/register" style="float: right" class="active">Регистрация</a>
     </div>
 {% endblock %}
 
@@ -18,7 +18,10 @@
             <label class="danger">Пароли не совпадают</label>
         {% endif %}
         {% if code == 3 %}
-            <label class="danger">Мы нк сможем хранить и обрабатывать ваши персональные данные, если вы не согласитесь с условиями обработки информации</label>
+            <label class="danger">Мы не сможем хранить и обрабатывать ваши персональные данные, если вы не согласитесь с условиями обработки информации</label>
+        {% endif %}
+        {% if code == 4 %}
+            <label class="danger">Почта уже занята</label>
         {% endif %}
         <input type="text" placeholder="почта" name="email" value="{{ new_user.email }}" required>
         <input type="text" placeholder="имя" name="name" value="{{ new_user.name }}" required>

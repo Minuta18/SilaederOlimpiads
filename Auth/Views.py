@@ -57,6 +57,7 @@ def register():
             klass=klass,
             password_hashed=generate_password_hash(password, method='scrypt'),
             permissions=Permissions.admin.value,
+            points=0,
         )
 
         if not request.form.get('accept'):
@@ -68,8 +69,12 @@ def register():
         if False: # TODO: add validation if user is not in silaeder
             return render_template('auth/Register.html', code=2, new_user=new_user)
 
-        db.session.add(new_user)
-        db.session.commit()
+        try:
+            db.session.add(new_user)
+            db.session.commit()
+        except IntegrityError:
+            db.session.rollback()
+            return render_template('auth/Register.html', code=4, new_user=new_user)
         login_user(new_user)
 
         return redirect('/')

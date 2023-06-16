@@ -6,6 +6,9 @@ class Olimp(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), unique=True)
     description = db.Column(db.String(255))
+    points_for_win = db.Column(db.SmallInteger)
+    points_for_prize = db.Column(db.SmallInteger)
+    points_for_member = db.Column(db.SmallInteger)
 
     def repr(self):
         return '<Olimp %r>' % (self.id)

@@ -6,6 +6,7 @@
     <div class="navbar">
         <a href="/" class="active">Силаэдр олипиады</a>
         <a href="/add">Добавить олимпиаду</a>
+        <a href="/leaderboard">Таблица лидеров</a>
         <a href="/user/{{ usr.id }}" style="float: right">Мой аккаунт</a>
     </div>
 {% endblock %}
@@ -19,6 +20,9 @@
         {% endif %}
         <input type="text" placeholder="Название" name="name" required>
         <textarea placeholder="Описание" name="desc" required></textarea>
+        <input type="number" placeholder="Очки за победу" name="pfw" required>
+        <input type="number" placeholder="Очки за призёрство" name="pfp" required>
+        <input type="number" placeholder="Очки за участие" name="pfm" required>
         <input type="submit" value="Добавить">
     </form>
 </div>
