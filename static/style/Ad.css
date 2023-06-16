@@ -1,0 +1,15 @@
+.down-ad-container {
+    position: fixed;
+    display: block;
+    width: 468;
+    height: 60;
+    top: 100%;
+    left: 50%;
+    margin-top: -60px;
+    margin-left: -234px;
+}
+
+.down-ad-container img {
+    width: 100%;
+    height: auto;
+}

@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='style/Table.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='style/Tabs.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='style/Utils.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style/Ad.css') }}">
         {% block js %}{% endblock %}
     </head>
     <body>
@@ -23,36 +24,13 @@
         {% endblock %}
 
         {% block content %}
-            <div class="centered-container">
-                <h1 class="header-text">{{ username }}</h1>
-                <p class="hidden-text">ID: {{ user.id }}</p>
-                <p class="normal-text" style="margin-left: 10%; margin-right: 10%;">Почта: {{ user.email }}</p>
-                <p class="normal-text" style="margin-left: 10%; margin-right: 10%;">Класс: {{ user.klass }}</p>
-                <!-- <div class="top-table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <td scope="col">Олимпиада</td>
-                                <td scope="col">Место</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Всош по Бэдварсу, 11 класс</td>
-                                <td>Победитель</td>
-                            </tr>
-                            <tr>
-                                <td>Олимпиада номер 666 им. Пупсика, 7 класс</td>
-                                <td>Призёр</td>
-                            </tr>
-                            <tr>
-                                <td>Турнире по бравл старс, 1 группа детского сада</td>
-                                <td>Победитель</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div> -->
-            </div>
+
         {% endblock %}
+
+        <div class="down-ad-container">
+            <a href="http://info.silaeder.ru" target="_blank">
+                <img src="{{ url_for('static', filename='image/Ad.png') }}">
+            </a>
+        </div>  
     </body>
 </html>
