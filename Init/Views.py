@@ -5,9 +5,7 @@ from . import app
 
 @app.route('/')
 def index():
-    if not current_user.is_authenticated:
-        return '''You are not authenticated, loh'''
-    return f'''Hello, {current_user.name}''' 
+    return render_template('init/Index.html', usr=current_user)
 
 @app.route('/user/<user_id>')
 def user(user_id):
@@ -20,5 +18,6 @@ def user(user_id):
     return render_template(
         'init/User.html', 
         username=username,
+        usr=current_user,
         user=user,
     )

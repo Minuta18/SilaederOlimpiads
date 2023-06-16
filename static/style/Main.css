@@ -37,6 +37,11 @@ body {
     color: #ffae00;
 }
 
+.link {
+    color: #ffae00;
+    text-decoration: none;
+}
+
 .danger {
     display: block;
     text-align: start;

@@ -5,7 +5,9 @@ from sqlalchemy.exc import IntegrityError, PendingRollbackError
 from Init import app, db
 from .Models import Olimp
 from Olimp.Models import Usr_olimp
+from Olimp.Place import Place
 from Auth.Permissions import Permissions
+from Auth import User
 
 def admin_only(name):
     def decorator(func):
@@ -13,7 +15,7 @@ def admin_only(name):
         def wrapped(*args, **kwargs):
             if not current_user.is_authenticated:
                 abort(403)
-            if current_user.permissions != Permissions.admin.value():
+            if current_user.permissions != Permissions.admin.value:
                 abort(403)
             return func(*args, **kwargs)
         return wrapped
@@ -33,17 +35,60 @@ def add_olimp():
             db.session.commit()
         except IntegrityError:
             db.session.rollback()
-            return render_template('admin/Add.html', code=1)
+            return render_template('admin/Add.html', code=1, usr=current_user)
 
         return redirect('/admin/')
-    return render_template('admin/Add.html', code=0) # TODO
+    return render_template('admin/Add.html', code=0, usr=current_user) # TODO
 
 @app.route('/admin/', methods=['GET', 'POST'])
-@admin_only('all_olimps')
-def all_olimps():
-    return render_template('admin/Index.html', olimps=Olimp.query.filter(id==id))
-
-@app.route('/admin/list', methods=['GET', 'POST'])
 @admin_only('list_olimps')
-def list_olimps():
-    return render_template('admin/List.html', olimps=Usr_olimp.query.filter(id==id))
+def list_olimps(): # TODO: rewrite in C
+    olimps = Usr_olimp.query.all()
+    dicted_olimps = list()
+    for olimp in olimps:
+        Usr = User.query.get(olimp.user_id)
+        place = ''
+        if olimp.place == Place.winner.value:
+            place = 'Победитель'
+        elif olimp.place == Place.prizewinner.value:
+            place = 'Призёр'
+        else:
+            place = 'Участник'
+        dicted_olimps.append({
+            'name': str(Olimp.query.get(olimp.olimp_id).name),
+            'id': int(olimp.olimp_id),
+            'user': str(f'{Usr.name} {Usr.last_name} {Usr.middle_name}'),
+            'user_id': int(f'{Usr.id}'),
+            'place': str(place),
+        })
+
+    if request.method == 'POST':
+        if request.form.get('usr_name') != '':
+            name = request.form.get('usr_name').lower()
+            dicted_olimps = [olimp for olimp in dicted_olimps if name.lower() in olimp['user'].lower()]
+        if request.form.get('oli_name') != '':
+            oli = request.form.get('oli_name').lower()
+            dicted_olimps = [olimp for olimp in dicted_olimps if oli.lower() in olimp['name'].lower()]
+        if request.form.get('filtering') != 0:
+            val = int(request.form.get('filtering'))
+            if val == 1:
+                dicted_olimps = [olimp for olimp in dicted_olimps if olimp['place'] == 'Победитель']
+            elif val == 2:
+                dicted_olimps = [olimp for olimp in dicted_olimps if olimp['place'] == 'Призёр']
+            elif val == 3:
+                dicted_olimps = [olimp for olimp in dicted_olimps if olimp['place'] == 'Участник']
+        if request.form.get('sorting1') != '0':
+            if request.form.get('sorting1') == '1':
+                dicted_olimps.sort(key=lambda olimp: olimp['user'])
+            else:
+                dicted_olimps.sort(key=lambda olimp: olimp['user'], reverse=True)
+        elif request.form.get('sorting2') != '0':
+            if request.form.get('sorting2') == '1':
+                dicted_olimps.sort(key=lambda olimp: olimp['place'])
+            else:
+                dicted_olimps.sort(key=lambda olimp: olimp['place'], reverse=True)
+    return render_template(
+        'admin/List.html', 
+        usr=current_user,
+        olimps=dicted_olimps,
+    )

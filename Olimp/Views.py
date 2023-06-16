@@ -17,7 +17,7 @@ def add_olimp_for_user():
 
         olimp = Olimp.query.filter_by(name=olimp).first()
         if not olimp:
-            return render_template('olimp/Add.html', code=1)
+            return render_template('olimp/Add.html', code=1, usr=current_user)
         
         used_olimp = Usr_olimp.query.filter_by(
             user_id=current_user.id, 
@@ -25,7 +25,7 @@ def add_olimp_for_user():
             created_at=datetime.strptime(date_, '%Y-%m-%d')
         ).first()
         if used_olimp != None:
-            return render_template('olimp/Add.html', code=2)
+            return render_template('olimp/Add.html', code=2, usr=current_user)
         
         new_olimp = Usr_olimp(
             user_id=current_user.id,
@@ -37,7 +37,7 @@ def add_olimp_for_user():
         db.session.commit()
 
         return redirect('/')
-    return render_template('olimp/Add.html', code=0)
+    return render_template('olimp/Add.html', code=0, usr=current_user, olimps=Olimp.query.all())
 
 @app.route('/olimp/<olimp_id>')
 def get_olimp(olimp_id):

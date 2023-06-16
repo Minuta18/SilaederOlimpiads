@@ -35,7 +35,7 @@
     <div class="navbar">
         <a href="/">Силаэдр олипиады</a>
         <a href="/add" class="active">Добавить олимпиаду</a>
-        <a href="/user/" style="float: right">Мой аккаунт</a>
+        <a href="/user/{{ usr.id }}" style="float: right">Мой аккаунт</a>
     </div>
 {% endblock %}
 
@@ -55,9 +55,9 @@
                 <input type="text" onclick="searchFunction()" placeholder="название" id="olimp" name="olimp" required>
                 <div id="myDropdown" class="dropdown-content">
                     <input type="text" placeholder="Поиск.." id="myInput" onkeyup="filterFunction()">
-                    <p onclick="setToInput('Всош по генетике')">Всош по генетике</p>
-                    <p onclick="setToInput('Мош по китайскому')">Мош по китайскому</p>
-                    <p onclick="setToInput('Сош по Вадиму Михайлову')">Сош по Вадиму Михайлову</p>
+                    {% for olimp in olimps %}
+                        <p onclick="setToInput('{{ olimp.name }}')">{{ olimp.name }}</p>
+                    {% endfor %}
                 </div>
             </div>
 
