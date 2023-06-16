@@ -1,20 +1,25 @@
-body {
-    padding: 0;
-    margin: 0;
-    font-family: sans-serif, arial, helvetica;
+.navbar {
+    background-color: #f1f1f1;
+    overflow: hidden;
 }
 
-.text {
-    font-size: medium;
-    padding: 8px;
-}
-
-.header-text {
+.navbar a {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
     font-size: larger;
-    font-weight: bold;
-    padding: 8px;
 }
 
-.accent {
-    color: #ffae00;
+.navbar a:hover {
+    background-color: #ffae00;
+    color: #f1f1f1;
+    transition-duration: 0.3s;
+}
+
+.navbar a.active {
+    background-color: #ffae00;
+    color: #f1f1f1;
 }

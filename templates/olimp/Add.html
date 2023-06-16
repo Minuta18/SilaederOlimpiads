@@ -1,0 +1,74 @@
+{% extends "init/Base.html" %}
+
+{% block title %}Добавление олимпиады - Силаэдр олимпиады{% endblock %}
+
+{% block js %}
+    <script>
+        function searchFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        function filterFunction() {
+            var input, filter, ul, li, a, i;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            div = document.getElementById("myDropdown");
+            a = div.getElementsByTagName("p");
+            for (i = 0; i < a.length; i++) {
+                txtValue = a[i].textContent || a[i].innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    a[i].style.display = "";
+                } else {
+                    a[i].style.display = "none";
+                }
+            }
+        } 
+
+        function setToInput(name) {
+            var inputter = document.getElementById("olimp");
+            inputter.value = name;
+        }
+    </script>
+{% endblock %}
+
+{% block navbar %}
+    <div class="navbar">
+        <a href="/">Силаэдр олипиады</a>
+        <a href="/add" class="active">Добавить олимпиаду</a>
+        <a href="/user/{{ usr.id }}" style="float: right">Мой аккаунт</a>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="form-container">
+        <form method="post">
+            <label><h1>Добавление олимпиады</h1></label>
+
+            {% if code == 1 %}
+                <label class="danger">Не существует олимпиады</label>
+            {% endif %}
+            {% if code == 2 %}
+                <label class="danger">Данные об этой олимпиаде уже есть в ситеме</label>
+            {% endif %}
+
+            <div class="search-dropdown">
+                <input type="text" onclick="searchFunction()" placeholder="название" id="olimp" name="olimp" required>
+                <div id="myDropdown" class="dropdown-content">
+                    <input type="text" placeholder="Поиск.." id="myInput" onkeyup="filterFunction()">
+                    {% for olimp in olimps %}
+                        <p onclick="setToInput('{{ olimp.name }}')">{{ olimp.name }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <input type="date" placeholder="дата написания" value="15-06-2023" name="date" required>
+            <select name="place">
+                <option value="0" selected>Победитель</option>
+                <option value="1">Призёр</option>
+                <option value="2">Участник</option>
+            </select>
+            <input type="submit">
+        </form>
+    </div>
+{% endblock %}
+

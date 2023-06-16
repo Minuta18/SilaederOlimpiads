@@ -1,0 +1,72 @@
+{% extends "init/Base.html" %}
+
+{% block title %}Редактирование профиля - Силаэдр олимпиады{% endblock %}
+
+{% block js %}
+    <script>
+        function openTab(evt, name) {
+            var i, tabcontent, tablinks;
+
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            document.getElementById(name).style.display = "block";
+            evt.currentTarget.className += " active";
+        } 
+    </script>
+{% endblock %}
+
+{% block navbar %}
+    <div class="navbar">
+        <a href="/">Силаэдр олипиады</a>
+        <a href="/add" class="active">Добавить олимпиаду</a>
+        <a href="/user/{{ usr.id }}" style="float: right">Мой аккаунт</a>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="centered-container" style="padding: 0px; width: 70%">
+        <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'MyAcc')" id="defaultOpen1">Моу аккаунт</button>
+            <button class="tablinks" onclick="openTab(event, 'Security')" id="defaultOpen2">Безопасность</button>
+            <button class="tablinks" onclick="openTab(event, 'Danger')" id="defaultOpen3">Опасная зона</button>
+        </div>
+
+        <div id="MyAcc" class="tabcontent">
+            <form method="post" action="?form=1">
+                <label><h1 class="header-text">Основные настройки</h1></label>
+                <input type="text" placeholder="почта" name="email" style="margin-top: 4px !important" value="{{ usr.email }}" required>
+                <input type="text" placeholder="имя" name="name" style="margin-top: 4px !important" value="{{ usr.name }}" required>
+                <input type="text" placeholder="фамилия" name="surname" style="margin-top: 4px !important" value="{{ usr.last_name }}" required>
+                <input type="text" placeholder="отчество" name="midname" style="margin-top: 4px !important" value="{{ usr.middle_name }}" required>
+                <input type="number" placeholder="класс" name="klass" style="margin-top: 4px !important"  value="{{ usr.klass }}" min="5" max="11" required>
+                <input type="submit" style="margin-top: 4px" value="Подтвердить">
+            </form>
+        </div>
+
+        <div id="Security" class="tabcontent">
+            <form method="post" action="?form=2">
+                <label><h1 class="header-text">Безопасность</h1></label>
+                <input type="password" style="margin-top: 4px !important" placeholder="Старый пароль" name="old-pass" required>  
+                <input type="password" style="margin-top: 4px !important" placeholder="Новый пароль" name="new-pass" required>
+                <input type="password" style="margin-top: 4px !important" placeholder="Повторение пароля" name="new-pass-repeat" required>
+                <input type="submit" value="Подтвердить" />
+            </form>
+        </div>
+
+        <div id="Danger" class="tabcontent">
+            <h1 class="normal-text" style="font-size: xx-large;">Опасная зона</h1>
+            <a href="/logout" class="danger">Выход из аккаунта</a>
+            <!-- <a href="/remove" class="danger">Сбросить пароль</a>
+            <a href="/delete" class="danger">Удалить аккаунт</a> -->
+        </div>
+    </div>
+    <script>document.getElementById("defaultOpen{{ defaultOpen }}").click();</script>
+{% endblock %}

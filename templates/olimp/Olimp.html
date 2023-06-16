@@ -1,0 +1,27 @@
+{% extends "init/Base.html" %}
+
+{% block title %}Добавление олимпиады - Силаэдр олимпиады{% endblock %}
+
+{% block navbar %}
+    {% if usr.is_authenticated %}
+        <div class="navbar">
+            <a href="/">Силаэдр олипиады</a>
+            <a href="/add">Добавить олимпиаду</a>
+            <a href="/user/{{ usr.id }}" style="float: right">Мой аккаунт</a>
+        </div>
+    {% else %}
+        <div class="navbar">
+            <a href="/">Силаэдр олипиады</a>
+            <a href="/login" style="float: right" class="active">Вход</a>
+            <a href="/register" style="float: right">Регистрация</a>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="centered-container">
+        <h1 class="header-text">{{ olimp.name }}</h1>
+        <p class="hidden-text">ID: {{ olimp.id }}</p>
+        <p class="normal-text" >{{ olimp.description }}</p>
+    </div>
+{% endblock %}

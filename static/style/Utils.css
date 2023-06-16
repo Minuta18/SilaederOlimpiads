@@ -1,0 +1,15 @@
+.filter-container {
+    position: fixed;
+    display: block;
+    padding: 4px;
+    margin: 16px;
+    background-color: #f1f1f1f1;
+    border: 1px solid #d7d7d7;
+}
+
+.filter-container select, input, label {
+    display: inline-block;
+    height: 30px;
+    min-width: 120px;
+    margin-top: 14px;
+}

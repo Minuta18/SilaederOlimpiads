@@ -1,0 +1,35 @@
+{% extends "init/Base.html" %}
+
+{% block title %}Регистрация - Силаэдр олимпиады{% endblock %}
+
+{% block navbar %}
+    <div class="navbar">
+        <a href="/">Силаэдр олипиады</a>
+        <a href="/login" style="float: right" class="active">Вход</a>
+        <a href="/register" style="float: right">Регистрация</a>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <form method="post">
+        <label><h1>Регистрация</h1></label>
+        {% if code == 1 %}
+            <label class="danger">Пароли не совпадают</label>
+        {% endif %}
+        {% if code == 3 %}
+            <label class="danger">Мы нк сможем хранить и обрабатывать ваши персональные данные, если вы не согласитесь с условиями обработки информации</label>
+        {% endif %}
+        <input type="text" placeholder="почта" name="email" value="{{ new_user.email }}" required>
+        <input type="text" placeholder="имя" name="name" value="{{ new_user.name }}" required>
+        <input type="text" placeholder="фамилия" name="surname" value="{{ new_user.surname }}" required>
+        <input type="text" placeholder="отчество" name="midname" value="{{ new_user.midname }}" required>
+        <input type="number" placeholder="класс" name="klass" value="{{ new_user.klass }}" min="5" max="11" required>
+        <input type="password" placeholder="пароль" name="pass" required>
+        <input type="password" placeholder="повторение пароля" name="pass2" required>
+        <input type="checkbox" name="accept" style="display: unset; text-align: unset;" checked>
+        <label for="accept" style="display: unset; text-align: unset;">Я принимаю условия обработки персональной информации</label>
+        <input type="submit" value="Регистрация">
+    </form>
+</div>
+{% endblock %}

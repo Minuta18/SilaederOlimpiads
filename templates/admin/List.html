@@ -1,0 +1,62 @@
+{% extends "init/Base.html" %}
+
+{% block title %}Список - Силаэдр олимпиады{% endblock %}
+
+{% block navbar %}
+    <div class="navbar">
+        <a href="/">Силаэдр олипиады</a>
+        <a href="/add">Добавить олимпиаду</a>
+        <a href="/user/{{ usr.id }}" style="float: right">Мой аккаунт</a>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="filter-container">
+        <form method="post">
+            <label class="header-text">Сортировка</label><br>
+            <label for="sorting1" class="text">Сортировка по фамилии:</label>
+            <select name="sorting1">
+                <option value="0" selected>Нет</option>
+                <option value="1">от А до Я</option>
+                <option value="2">от Я до А</option>
+            </select><br>
+            <label for="sorting2" class="text">Сортировка по месту:</label>
+            <select name="sorting2">
+                <option value="0" selected>Нет</option>
+                <option value="1">Сначала победители</option>
+                <option value="2">Сначала участники</option>
+            </select><br>
+            <label clas="text">Показывать только:</label><br>
+            <input type="text" placeholder="Фамилия" name="usr_name"><br>
+            <input type="text" placeholder="Олимпиада" name="oli_name"><br>
+            <select name="filtering">
+                <option value="0" selected>Все</option>
+                <option value="1">Победители</option>
+                <option value="2">Призёры</option>
+                <option value="3">Участники</option>
+            </select><br>
+            <input type="submit" value="Применить">
+        </form>
+    </div>
+
+    <div class="top-table">
+        <table>
+            <thead>
+                <tr>
+                    <td>Название олимпиады</td>
+                    <td>Участник</td>
+                    <td>Место</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for olimp in olimps %}
+                    <tr>
+                        <td>{{ olimp.name }}</td>
+                        <td>{{ olimp.user }}</td>
+                        <td>{{ olimp.place }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

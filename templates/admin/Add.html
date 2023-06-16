@@ -1,0 +1,25 @@
+{% extends "init/Base.html" %}
+
+{% block title %}Добавление олимпиады - Силаэдр олимпиады{% endblock %}
+
+{% block navbar %}
+    <div class="navbar">
+        <a href="/" class="active">Силаэдр олипиады</a>
+        <a href="/add">Добавить олимпиаду</a>
+        <a href="/user/{{ usr.id }}" style="float: right">Мой аккаунт</a>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <form method="post">
+        <label><h1>Добавление олимпиады</h1></label>
+        {% if code == 1 %}
+            <label class="danger">Олимпиада уже зарегестрирована</label>
+        {% endif %}
+        <input type="text" placeholder="Название" name="name" required>
+        <textarea placeholder="Описание" name="desc" required></textarea>
+        <input type="submit" value="Добавить">
+    </form>
+</div>
+{% endblock %}

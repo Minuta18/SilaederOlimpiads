@@ -1,0 +1,55 @@
+{% extends "init/Base.html" %}
+
+{% block title %}{{ username }} - Силаэдр олимпиады{% endblock %}
+
+{% block navbar %}
+    {% if usr.is_authenticated %}
+        <div class="navbar">
+            <a href="/">Силаэдр олипиады</a>
+            <a href="/add">Добавить олимпиаду</a>
+            <a href="/user/{{ usr.id }}" style="float: right" class="active">Мой аккаунт</a>
+        </div>
+    {% else %}
+        <div class="navbar">
+            <a href="/">Силаэдр олипиады</a>
+            <a href="/login" style="float: right" class="active">Вход</a>
+            <a href="/register" style="float: right">Регистрация</a>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="centered-container">
+        <h1 class="header-text">{{ username }}</h1>
+        <p class="hidden-text">ID: {{ user.id }}</p>
+        <p class="normal-text" style="margin-left: 10%; margin-right: 10%;">Почта: {{ user.email }}</p>
+        <p class="normal-text" style="margin-left: 10%; margin-right: 10%;">Класс: {{ user.klass }}</p>
+        {% if user.id == usr.id %}
+            <a href="/edit" class="link">Изменить аккаунт</p>
+        {% endif %}
+        <!-- <div class="top-table">
+            <table>
+                <thead>
+                    <tr>
+                        <td scope="col">Олимпиада</td>
+                        <td scope="col">Место</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Всош по Бэдварсу, 11 класс</td>
+                        <td>Победитель</td>
+                    </tr>
+                    <tr>
+                        <td>Олимпиада номер 666 им. Пупсика, 7 класс</td>
+                        <td>Призёр</td>
+                    </tr>
+                    <tr>
+                        <td>Турнире по бравл старс, 1 группа детского сада</td>
+                        <td>Победитель</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> -->
+    </div>
+{% endblock %}

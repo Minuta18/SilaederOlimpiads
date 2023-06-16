@@ -1,3 +1,8 @@
+* {
+    box-sizing: 
+    border-box
+}
+
 body {
     padding: 0;
     margin: 0;
@@ -9,12 +14,38 @@ body {
     padding: 8px;
 }
 
+.normal-text {
+    font-size: medium;
+    padding: 8px;
+    width: 100%;
+    text-align: start;
+}
+
 .header-text {
     font-size: larger;
     font-weight: bold;
     padding: 8px;
 }
 
+.hidden-text {
+    font-size: small;
+    padding: 8px;
+    color: #5a5a5a;
+}
+
 .accent {
     color: #ffae00;
+}
+
+.link {
+    color: #ffae00;
+    text-decoration: none;
+}
+
+.danger {
+    display: block;
+    text-align: start;
+    text-decoration: none;
+    color: #591f1f;
+    padding: 16px;
 }
