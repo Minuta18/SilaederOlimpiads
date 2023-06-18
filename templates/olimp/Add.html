@@ -8,6 +8,10 @@
             document.getElementById("myDropdown").classList.toggle("show");
         }
 
+        function disableSearchFunction() {
+            document.getElementById("myDropdown").classList.toggle("hide");
+        }
+
         function filterFunction() {
             var input, filter, ul, li, a, i;
             input = document.getElementById("myInput");
@@ -52,8 +56,9 @@
                 <label class="danger">Данные об этой олимпиаде уже есть в ситеме</label>
             {% endif %}
 
+            <label for="olimp" class="text">Название олимпиады:</label>
             <div class="search-dropdown">
-                <input type="text" onclick="searchFunction()" placeholder="название" id="olimp" name="olimp" required>
+                <input type="text" onclick="searchFunction()" placeholder="Введите название олимпиады" id="olimp" name="olimp" required>
                 <div id="myDropdown" class="dropdown-content">
                     <input type="text" placeholder="Поиск.." id="myInput" onkeyup="filterFunction()">
                     {% for olimp in olimps %}
@@ -62,12 +67,16 @@
                 </div>
             </div>
 
+            <label for="date" class="text">Дата написания:</label>
             <input type="date" placeholder="дата написания" value="15-06-2023" name="date" required>
-            <select name="place">
-                <option value="0" selected>Победитель</option>
-                <option value="1">Призёр</option>
-                <option value="2">Участник</option>
-            </select>
+            <div style="text-align: start;">
+                <span class="inline"><label for="place" class="text">Место:</label></span>
+                <select name="place">
+                    <option value="0" selected>Победитель</option>
+                    <option value="1">Призёр</option>
+                    <option value="2">Участник</option>
+                </select>
+            </div>
             <input type="submit">
         </form>
     </div>

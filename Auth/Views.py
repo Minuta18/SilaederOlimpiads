@@ -45,7 +45,6 @@ def register():
         name = request.form.get('name')
         surname = request.form.get('surname')
         midname = request.form.get('midname')
-        klass = int(request.form.get('klass'))
         password = request.form.get('pass')
         password_confirmation = request.form.get('pass2')
 
@@ -54,7 +53,6 @@ def register():
             name=name,
             last_name=surname,
             middle_name=midname,
-            klass=klass,
             password_hashed=generate_password_hash(password, method='scrypt'),
             permissions=Permissions.admin.value,
             points=0,
@@ -80,7 +78,7 @@ def register():
         return redirect('/')
     return render_template('auth/Register.html', code=0, new_user=User(
         email='', name='', last_name='', middle_name='', 
-        klass=5, password_hashed='', permissions=Permissions.default.value,
+        password_hashed='', permissions=Permissions.default.value,
     ))
 
 @app.route('/logout/', methods=['GET'])

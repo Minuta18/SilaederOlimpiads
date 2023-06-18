@@ -7,7 +7,7 @@
     border: 1px solid #d7d7d7;
 }
 
-.filter-container select, input, label {
+select, .filter-container input, .filter-container label {
     display: inline-block;
     height: 30px;
     min-width: 120px;

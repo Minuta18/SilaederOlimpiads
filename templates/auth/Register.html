@@ -1,6 +1,6 @@
 {% extends "init/Base.html" %}
 
-{% block title %}Таблица лидеров - Силаэдр олимпиады{% endblock %}
+{% block title %}Регистрация - Силаэдр олимпиады{% endblock %}
 
 {% block navbar %}
     <div class="navbar">
@@ -24,13 +24,15 @@
         {% if code == 4 %}
             <label class="danger">Почта уже занята</label>
         {% endif %}
-        <input type="text" placeholder="почта" name="email" value="{{ new_user.email }}" required>
-        <input type="text" placeholder="имя" name="name" value="{{ new_user.name }}" required>
-        <input type="text" placeholder="фамилия" name="surname" value="{{ new_user.surname }}" required>
-        <input type="text" placeholder="отчество" name="midname" value="{{ new_user.midname }}" required>
-        <input type="number" placeholder="класс" name="klass" value="{{ new_user.klass }}" min="5" max="11" required>
-        <input type="password" placeholder="пароль" name="pass" required>
-        <input type="password" placeholder="повторение пароля" name="pass2" required>
+        <label for="email" class="text">Почта:</label>
+        <input type="text" placeholder="Введите почту" name="email" value="{{ new_user.email }}" required>
+        <label for="name" class="text">ФИО:</label>
+        <input type="text" placeholder="Введите имя" name="name" value="{{ new_user.name }}" required>
+        <input type="text" placeholder="Введите фамилию" name="surname" value="{{ new_user.surname }}" required>
+        <input type="text" placeholder="Введите отчество" name="midname" value="{{ new_user.midname }}" required>
+        <label for="email" class="text">Пароль:</label>
+        <input type="password" placeholder="Введите пароль" name="pass" required>
+        <input type="password" placeholder="Повторите пароль" name="pass2" required>
         <input type="checkbox" name="accept" style="display: unset; text-align: unset;" checked>
         <label for="accept" style="display: unset; text-align: unset;">Я принимаю условия обработки персональной информации</label>
         <input type="submit" value="Регистрация">

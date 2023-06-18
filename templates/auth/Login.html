@@ -21,8 +21,10 @@
         {% if code == 2 %}
             <label class="danger">Пароли не совпадают</label>
         {% endif %}
-        <input type="text" placeholder="почта" name="email" value="{{ email }}" required>
-        <input type="password" placeholder="пароль" name="password" value="{{ passw }}" required>
+        <label for="email" class="text">Почта:</label>
+        <input type="text" placeholder="Введите почту" name="email" value="{{ email }}" required>
+        <label for="email" class="text">Пароль:</label>
+        <input type="password" placeholder="Введите пароль" name="password" value="{{ passw }}" required>
         <input type="submit" value="Вход">
     </form>
 </div>

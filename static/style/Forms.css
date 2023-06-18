@@ -4,24 +4,26 @@ label {
     margin: 4px;  
 }
 
+.inline label {
+    text-align: start;
+    display: inline-block;
+    margin: 4px;
+}
+
 input {
     display: block;
-    padding-left: auto;
-    padding-right: auto;
-    margin-top: 16px !important;
-    width: 97%;
-    height: 20px;  
+    width: calc(100% - 10px);
     margin: 4px;  
+    height: 30px;
 }
 
 input[type="submit"] {
     display: block;
     margin: 4px;
+    margin-top: 8px;
     background-color: #ffae00;
     border: 1px solid #ffae00;
     color: #f1f1f1;
-    height: 20px;
-    width: 99%;
 }
 
 input[type="checkbox"] {
@@ -32,6 +34,5 @@ textarea {
     display: block;
     margin: 4px;
     margin-top: 8px;
-    width: 97%;
     height: 300px;
 }

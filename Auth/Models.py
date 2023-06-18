@@ -9,7 +9,6 @@ class User(UserMixin, db.Model):
     name = db.Column(db.String(255), index=True)
     last_name = db.Column(db.String(255), index=True)
     middle_name = db.Column(db.String(255), index=True)
-    klass = db.Column(db.SmallInteger)
     password_hashed = db.Column(db.String(255))
     permissions = db.Column(db.SmallInteger)
     points = db.Column(db.Integer)

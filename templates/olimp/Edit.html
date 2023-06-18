@@ -43,11 +43,13 @@
         <div id="MyAcc" class="tabcontent">
             <form method="post" action="?form=1">
                 <label><h1 class="header-text">Основные настройки</h1></label>
-                <input type="text" placeholder="почта" name="email" style="margin-top: 4px !important" value="{{ usr.email }}" required>
-                <input type="text" placeholder="имя" name="name" style="margin-top: 4px !important" value="{{ usr.name }}" required>
-                <input type="text" placeholder="фамилия" name="surname" style="margin-top: 4px !important" value="{{ usr.last_name }}" required>
-                <input type="text" placeholder="отчество" name="midname" style="margin-top: 4px !important" value="{{ usr.middle_name }}" required>
-                <input type="number" placeholder="класс" name="klass" style="margin-top: 4px !important"  value="{{ usr.klass }}" min="5" max="11" required>
+
+                <label for="olimp" class="text">Почта:</label>
+                <input type="text" placeholder="Введите почту" name="email" value="{{ usr.email }}" required>
+                <label for="olimp" class="text">ФИО:</label>
+                <input type="text" placeholder="Введите имя" name="name" value="{{ usr.name }}" required>
+                <input type="text" placeholder="Введите фамилию" name="surname" value="{{ usr.last_name }}" required>
+                <input type="text" placeholder="Введите отчество" name="midname" value="{{ usr.middle_name }}" required>
                 <input type="submit" style="margin-top: 4px" value="Подтвердить">
             </form>
         </div>
