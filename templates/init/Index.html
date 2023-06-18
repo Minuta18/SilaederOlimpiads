@@ -8,6 +8,9 @@
             <a href="/" class="active">Олимпиадник</a>
             <a href="/add">Добавить олимпиаду</a>
             <a href="/leaderboard">Таблица лидеров</a>
+            {% if is_admin %}
+                <a href="/admin">Панель администратора</a>
+            {% endif %}
             <a href="/user/{{ usr.id }}" style="float: right">Мой аккаунт</a>
         </div>
     {% else %}

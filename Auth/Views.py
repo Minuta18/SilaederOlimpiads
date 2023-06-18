@@ -6,7 +6,7 @@ from sqlalchemy.exc import IntegrityError
 from Init import db
 from .Models import User
 from Init import app
-from .Permissions import Permissions
+from .Permissions import Permissions, is_admin
 
 def not_login_required(name):
     def decorator(func):
@@ -101,7 +101,7 @@ def edit():
                 cuser.last_name = request.form.get('surname')
                 cuser.middle_name = request.form.get('midname')
             except IntegrityError:
-                return render_template('olimp/Edit.html', usr=cuser, code=1, defaultOpen=1)
+                return render_template('olimp/Edit.html', usr=cuser, code=1, defaultOpen=1, is_admin=is_admin())
         elif form == 2:
             old_pass = request.form.get('old-pass')
             new_pass = request.form.get('new-pass')
@@ -109,11 +109,11 @@ def edit():
 
             if check_password_hash(cuser.password_hashed, old_pass):
                 if new_pass != new_pass_repeat:
-                    return render_template('olimp/Edit.html', usr=cuser, code=2, defaultOpen=2)
+                    return render_template('olimp/Edit.html', usr=cuser, code=2, defaultOpen=2, is_admin=is_admin())
                 cuser.password_hashed = generate_password_hash(new_pass, method='scrypt')
             else:
-                return render_template('olimp/Edit.html', usr=cuser, code=3, defaultOpen=2)
+                return render_template('olimp/Edit.html', usr=cuser, code=3, defaultOpen=2, is_admin=is_admin())
             
         db.session.commit()
 
-    return render_template('olimp/Edit.html', usr=cuser, code=0, defaultOpen=1)
+    return render_template('olimp/Edit.html', usr=cuser, code=0, defaultOpen=1, is_admin=is_admin())
