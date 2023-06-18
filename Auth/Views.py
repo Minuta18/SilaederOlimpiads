@@ -100,7 +100,6 @@ def edit():
                 cuser.name = request.form.get('name')
                 cuser.last_name = request.form.get('surname')
                 cuser.middle_name = request.form.get('midname')
-                cuser.klass = int(request.form.get('klass'))
             except IntegrityError:
                 return render_template('olimp/Edit.html', usr=cuser, code=1, defaultOpen=1)
         elif form == 2:

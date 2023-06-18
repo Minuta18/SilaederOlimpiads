@@ -25,7 +25,6 @@
         <h1 class="header-text">{{ username }}</h1>
         <p class="hidden-text">ID: {{ user.id }}</p>
         <p class="normal-text" style="margin-left: 10%; margin-right: 10%;">Почта: {{ user.email }}</p>
-        <p class="normal-text" style="margin-left: 10%; margin-right: 10%;">Класс: {{ user.klass }}</p>
         <p class="normal-text" style="margin-left: 10%; margin-right: 10%;">Очки: {{ user.points }}</p>
         {% if user.id == usr.id %}
             <a href="/edit" class="link">Изменить аккаунт</p>
