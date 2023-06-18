@@ -1,18 +1,18 @@
 {% extends "init/Base.html" %}
 
-{% block title %}Главная - Силаэдр олимпиады{% endblock %}
+{% block title %}Главная - Олимпиадник{% endblock %}
 
 {% block navbar %}
     {% if usr.is_authenticated %}
         <div class="navbar">
-            <a href="/" class="active">Силаэдр олипиады</a>
+            <a href="/" class="active">Олимпиадник</a>
             <a href="/add">Добавить олимпиаду</a>
             <a href="/leaderboard">Таблица лидеров</a>
             <a href="/user/{{ usr.id }}" style="float: right">Мой аккаунт</a>
         </div>
     {% else %}
         <div class="navbar">
-            <a href="/" class="active">Силаэдр олипиады</a>
+            <a href="/" class="active">Олимпиадник</a>
             <a href="/leaderboard">Таблица лидеров</a>
             <a href="/login" style="float: right">Вход</a>
             <a href="/register" style="float: right">Регистрация</a>
@@ -22,7 +22,7 @@
 
 {% block content %}
 <div class="centered-container">
-    <p class="text"><span class="header-text">Добро пожаловать на сайт Силаэдр Олимпиады</span>
+    <p class="text"><span class="header-text">Добро пожаловать на сайт Олимпиадник</span>
     <p class="text">Он создан для заполнения и сохранения успехов и достижений учащихся. Также вы можете просмотреть рейтинговую таблицу, составленную на основе олимпиад среди всех школьников Силаэдра. </p>
     <p class="hidden-text">Если нашли какую-то ошибку, обратитесь нам: <a href="https://t.me/Polini_D" class="accent">@Polini_D</a></p>
 </div>
