@@ -4,9 +4,10 @@
 
 {% block navbar %}
     <div class="navbar">
-        <a href="/" class="active">Олимпиадник</a>
+        <a href="/">Олимпиадник</a>
         <a href="/add">Добавить олимпиаду</a>
         <a href="/leaderboard">Таблица лидеров</a>
+        <a href="/admin" class="active">Панель администратора</a>
         <a href="/user/{{ usr.id }}" style="float: right">Мой аккаунт</a>
     </div>
 {% endblock %}
@@ -18,8 +19,11 @@
         {% if code == 1 %}
             <label class="danger">Олимпиада уже зарегестрирована</label>
         {% endif %}
+        <label for="name">Название олимпиады:</label>
         <input type="text" placeholder="Название" name="name" required>
+        <label for="name">Описание олимпиады:</label>
         <textarea placeholder="Описание" name="desc" required></textarea>
+        <label for="name">Название олимпиады:</label>
         <input type="number" placeholder="Очки за победу" name="pfw" required>
         <input type="number" placeholder="Очки за призёрство" name="pfp" required>
         <input type="number" placeholder="Очки за участие" name="pfm" required>

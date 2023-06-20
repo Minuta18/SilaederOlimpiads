@@ -33,7 +33,6 @@ def add_olimp_for_user():
             olimp_id=olimp.id,
             created_at=datetime.strptime(date_, '%Y-%m-%d'),
             place=place,
-            is_admin=is_admin()
         )
 
         if place == 0:
@@ -49,7 +48,7 @@ def add_olimp_for_user():
         return redirect('/')
     return render_template('olimp/Add.html', code=0, usr=current_user, olimps=Olimp.query.all(), is_admin=is_admin())
 
-@app.route('/olimp/<olimp_id>')
+@app.route('/olimp/<olimp_id>/')
 def get_olimp(olimp_id):
     olimp = Olimp.query.get(olimp_id)
     if olimp == None:

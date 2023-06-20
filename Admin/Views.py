@@ -21,6 +21,11 @@ def admin_only(name):
         return wrapped
     return decorator
 
+@app.route('/admin/', methods=['GET', 'POST'])
+@admin_only('admin_panel')
+def admin_panel():
+    return render_template('admin/Admin.html', usr=current_user)
+
 @app.route('/admin/add/', methods=['GET', 'POST'])
 @admin_only('add_olimp')
 def add_olimp():
@@ -49,7 +54,7 @@ def add_olimp():
         return redirect('/admin/')
     return render_template('admin/Add.html', code=0, usr=current_user) # TODO
 
-@app.route('/admin/', methods=['GET', 'POST'])
+@app.route('/admin/olimp_list/', methods=['GET', 'POST'])
 @admin_only('list_olimps')
 def list_olimps(): # TODO: rewrite in C
     olimps = Usr_olimp.query.all()

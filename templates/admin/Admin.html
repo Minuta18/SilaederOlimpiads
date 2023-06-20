@@ -1,0 +1,21 @@
+{% extends "init/Base.html" %}
+
+{% block title %}Панель администратора - Олимпиадник{% endblock %}
+
+{% block navbar %}
+    <div class="navbar">
+        <a href="/">Олимпиадник</a>
+        <a href="/add">Добавить олимпиаду</a>
+        <a href="/leaderboard">Таблица лидеров</a>
+        <a href="/admin" class="active">Панель администратора</a>
+        <a href="/user/{{ usr.id }}" style="float: right">Мой аккаунт</a>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="centered-container">
+    <p class="text"><span class="header-text">Панель администратора</span>
+    <p class="text"><a href="/admin/add" class="accent">Зарегестрировать олимпиаду</a></p>
+    <p class="text"><a href="/admin/olimp_list" class="accent">Список успехов учеников</a></p>
+</div>
+{% endblock %}

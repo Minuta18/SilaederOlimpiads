@@ -35,4 +35,5 @@ textarea {
     margin: 4px;
     margin-top: 8px;
     height: 300px;
+    width: calc(100% - 10px);
 }

@@ -7,6 +7,7 @@
         <a href="/">Олимпиадник</a>
         <a href="/add">Добавить олимпиаду</a>
         <a href="/leaderboard">Таблица лидеров</a>
+        <a href="/admin" class="active">Панель администратора</a>
         <a href="/user/{{ usr.id }}" style="float: right">Мой аккаунт</a>
     </div>
 {% endblock %}
@@ -52,8 +53,8 @@
             <tbody>
                 {% for olimp in olimps %}
                     <tr>
-                        <td>{{ olimp.name }}</td>
-                        <td>{{ olimp.user }}</td>
+                        <td><a href="/olimp/{{ olimp.id }}/">{{ olimp.name }}</a></td>
+                        <td><a href="/user/{{ olimp.user_id }}">{{ olimp.user }}</a></td>
                         <td>{{ olimp.place }}</td>
                     </tr>
                 {% endfor %}
