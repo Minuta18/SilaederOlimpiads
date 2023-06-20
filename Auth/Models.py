@@ -1,3 +1,5 @@
+import datetime
+
 from Init import db
 from flask_login import UserMixin
 
@@ -13,6 +15,9 @@ class User(UserMixin, db.Model):
     permissions = db.Column(db.SmallInteger)
     points = db.Column(db.Integer)
     # token = db.Column(db.String(255))
+
+    created_at = db.Column(db.DateTime, default=datetime.datetime.now())
+    updated_at = db.Column(db.DateTime, default=datetime.datetime.now())
 
     def __repr__(self):
         return '<User %r>' % (self.nickname)

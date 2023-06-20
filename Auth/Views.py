@@ -1,3 +1,4 @@
+import datetime
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import Flask, render_template, request, redirect
@@ -114,6 +115,7 @@ def edit():
             else:
                 return render_template('olimp/Edit.html', usr=cuser, code=3, defaultOpen=2, is_admin=is_admin())
             
+        cuser.updated_at = datetime.datetime.now()
         db.session.commit()
 
     return render_template('olimp/Edit.html', usr=cuser, code=0, defaultOpen=1, is_admin=is_admin())

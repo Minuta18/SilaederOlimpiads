@@ -28,9 +28,16 @@
                 <option value="1">Сначала победители</option>
                 <option value="2">Сначала участники</option>
             </select><br>
+            <label for="sorting3" class="text">Сортировка по классу:</label>
+            <select name="sorting3">
+                <option value="0" selected>Нет</option>
+                <option value="1">От меньшего к большему</option>
+                <option value="2">От большего к меньшему</option>
+            </select><br>
             <label clas="text">Показывать только:</label><br>
             <input type="text" placeholder="Фамилия" name="usr_name"><br>
             <input type="text" placeholder="Олимпиада" name="oli_name"><br>
+            <input type="text" placeholder="Класс" name="oli_klass"><br>
             <select name="filtering">
                 <option value="0" selected>Все</option>
                 <option value="1">Победители</option>
@@ -53,8 +60,8 @@
             <tbody>
                 {% for olimp in olimps %}
                     <tr>
-                        <td><a href="/olimp/{{ olimp.id }}/">{{ olimp.name }}</a></td>
-                        <td><a href="/user/{{ olimp.user_id }}">{{ olimp.user }}</a></td>
+                        <td><a href="/olimp/{{ olimp.id }}/" class="accent">{{ olimp.name }}</a>, {{ olimp.klass }} класс</td>
+                        <td><a href="/user/{{ olimp.user_id }}" class="accent">{{ olimp.user }}</a></td>
                         <td>{{ olimp.place }}</td>
                     </tr>
                 {% endfor %}

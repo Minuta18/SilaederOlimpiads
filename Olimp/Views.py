@@ -14,6 +14,7 @@ def add_olimp_for_user():
     if request.method == 'POST':
         olimp = request.form.get('olimp')
         date_ = request.form.get('date')
+        klass_ = request.form.get('klass')
         place = int(request.form.get('place'))
 
         olimp = Olimp.query.filter_by(name=olimp).first()
@@ -23,7 +24,8 @@ def add_olimp_for_user():
         used_olimp = Usr_olimp.query.filter_by(
             user_id=current_user.id, 
             olimp_id=olimp.id, 
-            created_at=datetime.strptime(date_, '%Y-%m-%d')
+            olimp_klass=klass_,
+            written_at=datetime.strptime(date_, '%Y-%m-%d')
         ).first()
         if used_olimp != None:
             return render_template('olimp/Add.html', code=2, usr=current_user, is_admin=is_admin())
@@ -31,7 +33,8 @@ def add_olimp_for_user():
         new_olimp = Usr_olimp(
             user_id=current_user.id,
             olimp_id=olimp.id,
-            created_at=datetime.strptime(date_, '%Y-%m-%d'),
+            olimp_klass=klass_,
+            written_at=datetime.strptime(date_, '%Y-%m-%d'),
             place=place,
         )
 

@@ -1,3 +1,4 @@
+import datetime
 from Init import db
 
 class Olimp(db.Model):
@@ -9,6 +10,9 @@ class Olimp(db.Model):
     points_for_win = db.Column(db.SmallInteger)
     points_for_prize = db.Column(db.SmallInteger)
     points_for_member = db.Column(db.SmallInteger)
+
+    created_at = db.Column(db.DateTime, default=datetime.datetime.now())
+    updated_at = db.Column(db.DateTime, default=datetime.datetime.now())
 
     def repr(self):
         return '<Olimp %r>' % (self.id)
