@@ -47,9 +47,9 @@
             <form method="post" action="?form=1">
                 <label><h1 class="header-text">Основные настройки</h1></label>
 
-                <label for="olimp" class="text">Почта:</label>
+                <label for="olimp" class="text" style="margin-top: 16px;">Почта:</label>
                 <input type="text" placeholder="Введите почту" name="email" value="{{ usr.email }}" required>
-                <label for="olimp" class="text">ФИО:</label>
+                <label for="olimp" class="text" style="margin-top: 16px;">ФИО:</label>
                 <input type="text" placeholder="Введите имя" name="name" value="{{ usr.name }}" required>
                 <input type="text" placeholder="Введите фамилию" name="surname" value="{{ usr.last_name }}" required>
                 <input type="text" placeholder="Введите отчество" name="midname" value="{{ usr.middle_name }}" required>
@@ -64,6 +64,11 @@
                 <input type="password" style="margin-top: 4px !important" placeholder="Новый пароль" name="new-pass" required>
                 <input type="password" style="margin-top: 4px !important" placeholder="Повторение пароля" name="new-pass-repeat" required>
                 <input type="submit" value="Подтвердить" />
+                {% if usr.is_hidden %}
+                    <a href="/edit?action=hide&tab=2" class="accent" style="float: left; margin-left: 4px; margin-top: 16px; display: block;">Опубликовать аккаунт</a>
+                {% else %}
+                    <a href="/edit?action=hide&tab=2" class="accent" style="float: left; margin-left: 4px; margin-top: 16px; display: block;">Скрыть аккаунт</a>
+                {% endif %}
             </form>
         </div>
 

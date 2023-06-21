@@ -14,6 +14,10 @@ def user(user_id):
     if not user:
         abort(404)
 
+    if user.is_hidden:
+        if not (is_admin() or user.id == current_user.id):
+            abort(403)
+
     username = f'{user.name} {user.last_name} {user.middle_name}' 
 
     return render_template(

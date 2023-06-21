@@ -14,7 +14,9 @@ class User(UserMixin, db.Model):
     password_hashed = db.Column(db.String(255))
     permissions = db.Column(db.SmallInteger)
     points = db.Column(db.Integer)
-    # token = db.Column(db.String(255))
+    
+    is_hidden = db.Column(db.Boolean, default=False)
+    is_banned = db.Column(db.SmallInteger, default=False)
 
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now())

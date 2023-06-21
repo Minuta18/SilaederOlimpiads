@@ -1,18 +1,18 @@
 import datetime
 from Init import db
 
-class Usr_olimp(db.Model):
-    __tablename__ = 'usr_olimp'
+class Usr_olymp(db.Model):
+    __tablename__ = 'usr_olymp'
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    olimp_id = db.Column(db.Integer, db.ForeignKey('olimp.id'))
+    olymp_id = db.Column(db.Integer, db.ForeignKey('olymp.id'))
     written_at = db.Column(db.DateTime)
-    olimp_klass = db.Column(db.SmallInteger)
+    olymp_klass = db.Column(db.SmallInteger)
     place = db.Column(db.SmallInteger)
 
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now())
 
     def repr(self):
-        return '<UsersOlimp %r>' % (self.id)
+        return '<UsersOlymp %r>' % (self.id)

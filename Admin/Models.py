@@ -1,8 +1,8 @@
 import datetime
 from Init import db
 
-class Olimp(db.Model):
-    __tablename__ = 'olimp'
+class Olymp(db.Model):
+    __tablename__ = 'olymp'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), unique=True)
@@ -15,4 +15,4 @@ class Olimp(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now())
 
     def repr(self):
-        return '<Olimp %r>' % (self.id)
+        return '<Olymp %r>' % (self.id)

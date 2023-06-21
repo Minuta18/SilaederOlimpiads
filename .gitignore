@@ -160,4 +160,4 @@ cython_debug/
 #.idea/
 
 # Test databases
-.db
+app.db
