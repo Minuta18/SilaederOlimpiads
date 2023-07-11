@@ -5,7 +5,7 @@
 {% block navbar %}
     <div class="navbar">
         <a href={{ url_for('index') }}>Олимпиадник</a>
-        <a href={{ url_for('register_olymp') }}>Добавить олимпиаду</a>
+        <a href={{ url_for('add_olymp') }}>Добавить олимпиаду</a>
         <a href={{ url_for('leaderboard') }}>Таблица лидеров</a>
         <a href={{ url_for('admin_panel') }} class="active">Панель администратора</a>
         <a href={{ url_for('get_user', user_id=usr.id) }} style="float: right">Мой аккаунт</a>
@@ -25,12 +25,12 @@
             <tbody>
                 {% for olymp in olymps %}
                     <tr>
-                        <td><a href="/olymp/{{ olymp.id }}/" class="accent">{{ olymp.name }} {% if olymp.is_deleted %} (удалено) {% endif %}</a></td>
+                        <td><a href="{{ url_for('olymp', olymp_id=olymp.id) }}" class="accent">{{ olymp.name }} {% if olymp.is_deleted %} (удалено) {% endif %}</a></td>
                         <td>{{ olymp.date }}</td>
-                        <td><a href="/olymp/{{ olymp.id }}/edit/" class="accent">Изменить</a>, {% if olymp.is_deleted %}
-                            <a href="/olymp/{{ olymp.id }}/delete/" class="accent">Восстановить</a>
+                        <td><a href="{{ url_for('edit_olymp', olymp_id=olymp.id) }}" class="accent">Изменить</a>, {% if olymp.is_deleted %}
+                            <a href="{{ url_for('delete_olymp', olymp_id=olymp.id) }}" class="accent">Восстановить</a>
                         {% else %}
-                            <a href="/olymp/{{ olymp.id }}/delete/" class="accent">Удалить</a>
+                            <a href="{{ url_for('delete_olymp', olymp_id=olymp.id) }}" class="accent">Удалить</a>
                         {% endif %}
                         </td>
                     </tr>

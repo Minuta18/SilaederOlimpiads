@@ -38,7 +38,7 @@
 {% block navbar %}
     <div class="navbar">
         <a href={{ url_for('index') }}>Олимпиадник</a>
-        <a href={{ url_for('register_olymp') }} class="active">Добавить олимпиаду</a>
+        <a href={{ url_for('add_olymp') }} class="active">Добавить олимпиаду</a>
         <a href={{ url_for('leaderboard') }}>Таблица лидеров</a>
         {% if is_admin %}
             <a href={{ url_for('admin_panel') }}>Панель администратора</a>

@@ -16,3 +16,13 @@ class Usr_olymp(db.Model):
 
     def repr(self):
         return '<UsersOlymp %r>' % (self.id)
+    
+def get_place(place: int) -> str:
+    if place == 0:
+        return 'Победитель'
+    elif place == 1:
+        return 'Призёр'
+    elif place == 2:
+        return 'Участник'
+    else:
+        return 'Хммммм...'

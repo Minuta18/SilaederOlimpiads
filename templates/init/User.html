@@ -6,7 +6,7 @@
     {% if usr.is_authenticated %}
         <div class="navbar">
             <a href={{ url_for('index') }}>Олимпиадник</a>
-            <a href={{ url_for('register_olymp') }}>Добавить олимпиаду</a>
+            <a href={{ url_for('add_olymp') }}>Добавить олимпиаду</a>
             <a href={{ url_for('leaderboard') }}>Таблица лидеров</a>
             {% if is_admin %}
                 <a href={{ url_for('admin_panel') }}>Панель администратора</a>
@@ -33,9 +33,9 @@
         <p class="normal-text" style="margin-left: 10%; margin-right: 10%;">Почта: {{ user.email }}</p>
         <p class="normal-text" style="margin-left: 10%; margin-right: 10%;">Очки: {{ user.points }}</p>
         {% if user.id == usr.id %}
-            <a href="/edit" class="link">Изменить аккаунт</p>
+            <a href="{{ url_for('edit') }}" class="link">Изменить аккаунт</a>
         {% endif %}
-        <!-- <div class="top-table">
+        <div class="top-table">
             <table>
                 <thead>
                     <tr>
@@ -44,20 +44,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Всош по Бэдварсу, 11 класс</td>
-                        <td>Победитель</td>
-                    </tr>
-                    <tr>
-                        <td>Олимпиада номер 666 им. Пупсика, 7 класс</td>
-                        <td>Призёр</td>
-                    </tr>
-                    <tr>
-                        <td>Турнире по бравл старс, 1 группа детского сада</td>
-                        <td>Победитель</td>
-                    </tr>
+                    {% for olymp in writed_olymps %}
+                        <tr>
+                            <td class="text">{{ olymp.name }}</td>
+                            <td class="text">{{ olymp.place }}</td>
+                        </tr>
+                    {% endfor %}
+                    {% if len_writed_olymps == 0 %}
+                        <tr>
+                            <td class="text">Пользователь не написал ни одной олимпиады</td>
+                            <td class="text"></td>
+                        </tr>
+                    {% endif %}
                 </tbody>
             </table>
-        </div> -->
+        </div>
     </div>
 {% endblock %}

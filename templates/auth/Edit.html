@@ -26,7 +26,7 @@
 {% block navbar %}
     <div class="navbar">
         <a href={{ url_for('index') }}>Олимпиадник</a>
-        <a href={{ url_for('register_olymp') }}>Добавить олимпиаду</a>
+        <a href={{ url_for('add_olymp') }}>Добавить олимпиаду</a>
         <a href={{ url_for('leaderboard') }}>Таблица лидеров</a>
         {% if is_admin %}
             <a href={{ url_for('admin_panel') }}>Панель администратора</a>
@@ -65,16 +65,16 @@
                 <input type="password" style="margin-top: 4px !important" placeholder="Повторение пароля" name="new-pass-repeat" required>
                 <input type="submit" value="Подтвердить" />
                 {% if usr.is_hidden %}
-                    <a href="/edit?action=hide&tab=2" class="accent" style="float: left; margin-left: 4px; margin-top: 16px; display: block;">Опубликовать аккаунт</a>
+                    <a href="{{ url_for('edit') }}?action=hide&tab=2" class="accent" style="float: left; margin-left: 4px; margin-top: 16px; display: block;">Опубликовать аккаунт</a>
                 {% else %}
-                    <a href="/edit?action=hide&tab=2" class="accent" style="float: left; margin-left: 4px; margin-top: 16px; display: block;">Скрыть аккаунт</a>
+                    <a href="{{ url_for('edit') }}?action=hide&tab=2" class="accent" style="float: left; margin-left: 4px; margin-top: 16px; display: block;">Скрыть аккаунт</a>
                 {% endif %}
             </form>
         </div>
 
         <div id="Danger" class="tabcontent">
             <h1 class="normal-text" style="font-size: xx-large;">Опасная зона</h1>
-            <a href="/logout" class="danger">Выход из аккаунта</a>
+            <a href="{{ url_for('logout') }}" class="danger">Выход из аккаунта</a>
             <!-- <a href="/remove" class="danger">Сбросить пароль</a>
             <a href="/delete" class="danger">Удалить аккаунт</a> -->
         </div>

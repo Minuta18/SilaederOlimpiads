@@ -7,7 +7,7 @@ from Init import app, db
 from .Models import Olymp
 from Olymp.Models import Usr_olymp
 from Olymp.Place import Place
-from Auth.Permissions import Permissions
+from Auth.Permissions import Permissions, is_admin
 from Auth import User
 
 def admin_only(name):
@@ -16,7 +16,7 @@ def admin_only(name):
         def wrapped(*args, **kwargs):
             if not current_user.is_authenticated:
                 abort(403)
-            if current_user.permissions != Permissions.admin.value:
+            if not is_admin():
                 abort(403)
             return func(*args, **kwargs)
         return wrapped

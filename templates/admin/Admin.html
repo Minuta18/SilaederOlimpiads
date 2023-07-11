@@ -5,7 +5,7 @@
 {% block navbar %}
     <div class="navbar">
         <a href={{ url_for('index') }}>Олимпиадник</a>
-        <a href={{ url_for('register_olymp') }}>Добавить олимпиаду</a>
+        <a href={{ url_for('add_olymp') }}>Добавить олимпиаду</a>
         <a href={{ url_for('leaderboard') }}>Таблица лидеров</a>
         <a href={{ url_for('admin_panel') }} class="active">Панель администратора</a>
         <a href={{ url_for('get_user', user_id=usr.id) }} style="float: right">Мой аккаунт</a>
@@ -15,8 +15,8 @@
 {% block content %}
 <div class="centered-container">
     <p class="text"><span class="header-text">Панель администратора</span>
-    <p class="text"><a href="/admin/add" class="accent">Зарегестрировать олимпиаду</a></p>
-    <p class="text"><a href="/admin/olymp_list" class="accent">Список зарегестрированых олимпиад</a></p>
-    <p class="text"><a href="/admin/usr_olymp_list" class="accent">Список успехов учеников</a></p>
+    <p class="text"><a href="{{ url_for('register_olymp') }}" class="accent">Зарегестрировать олимпиаду</a></p>
+    <p class="text"><a href="{{ url_for('list_usr_olymps') }}" class="accent">Список зарегестрированых олимпиад</a></p>
+    <p class="text"><a href="{{ url_for('list_olymps') }}" class="accent">Список успехов учеников</a></p>
 </div>
 {% endblock %}

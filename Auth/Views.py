@@ -6,6 +6,8 @@ from flask_login import login_user, login_required, logout_user, current_user
 from sqlalchemy.exc import IntegrityError
 from Init import db
 from .Models import User
+from Admin.Models import Olymp
+from Olymp.Models import get_place, Usr_olymp
 from Init import app
 from .Permissions import Permissions, is_admin
 
@@ -30,12 +32,19 @@ def get_user(user_id):
             abort(403)
 
     username = f'{user.name} {user.last_name} {user.middle_name}' 
+    writed_olymps = [{
+        'id': int(olymp.id),
+        'name': f'{str(Olymp.query.get(olymp.olymp_id).name)}, {int(olymp.olymp_klass)} класс',
+        'place': get_place(olymp.place),
+    } for olymp in Usr_olymp.query.all()]
 
     return render_template(
         'init/User.html', 
         username=username,
         usr=current_user,
         user=user,
+        writed_olymps=writed_olymps,
+        len_writed_olymps=len(writed_olymps),
         is_admin=is_admin(),
     )
 
