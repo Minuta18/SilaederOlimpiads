@@ -17,6 +17,7 @@ class User(UserMixin, db.Model):
     
     is_hidden = db.Column(db.Boolean, default=False)
     is_banned = db.Column(db.Boolean, default=False)
+    banned_before = db.Column(db.DateTime, default=None)
 
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now())

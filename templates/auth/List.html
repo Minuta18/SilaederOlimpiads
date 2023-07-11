@@ -1,0 +1,40 @@
+{% extends "init/Base.html" %}
+
+{% block title %}Список учеников - Олимпиадник{% endblock %}
+
+{% block navbar %}
+    <div class="navbar">
+        <a href={{ url_for('index') }}>Олимпиадник</a>
+        <a href={{ url_for('add_olymp') }}>Добавить олимпиаду</a>
+        <a href={{ url_for('leaderboard') }}>Таблица лидеров</a>
+        <a href={{ url_for('admin_panel') }} class="active">Панель администратора</a>
+        <a href={{ url_for('get_user', user_id=usr.id) }} style="float: right">Мой аккаунт</a>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="top-table">
+        <table>
+            <thead>
+                <tr>
+                    <td>ФИО</td>
+                    <td>Почта</td>
+                    <td>Очки</td>
+                    <td>Последнее обновление</td>
+                    <td>Статус</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td><a href="{{ url_for('get_user', user_id=user['id']) }}" class="accent">{{ user['name'] }}</a></td>
+                        <td>{{ user['email'] }}</td>
+                        <td>{{ user['points'] }}</td>
+                        <td>{{ user['date'] }}</td>
+                        <td>{{ user['status'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

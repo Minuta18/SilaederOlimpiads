@@ -104,3 +104,20 @@ def list_olymps():
         olymps=olymps,
         usr=current_user,
     )
+
+@app.route('/admin/usr_list/', methods=['GET', 'POST'])
+@admin_only('usr_lists')
+def usr_lists():
+    users = [{
+        'id': usr.id,
+        'email': usr.email,
+        'name': f'{usr.name} {usr.last_name} {usr.middle_name}',
+        'date': usr.updated_at,
+        'status': (f'Забанен до { usr.banned_before }' if usr.is_banned else 'Всё нормально'),
+        'points': usr.points,
+    } for usr in User.query.all()]
+    return render_template(
+        'auth/List.html',
+        users=users,
+        usr=current_user,
+    )
