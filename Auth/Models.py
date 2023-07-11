@@ -16,7 +16,7 @@ class User(UserMixin, db.Model):
     points = db.Column(db.Integer)
     
     is_hidden = db.Column(db.Boolean, default=False)
-    is_banned = db.Column(db.SmallInteger, default=False)
+    is_banned = db.Column(db.Boolean, default=False)
 
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now())

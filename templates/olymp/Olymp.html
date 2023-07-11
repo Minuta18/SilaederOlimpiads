@@ -25,8 +25,13 @@
 
 {% block content %}
     <div class="centered-container">
-        <h1 class="header-text">{{ olimp.name }}</h1>
-        <p class="hidden-text">ID: {{ olimp.id }}</p>
-        <p class="normal-text" >{{ olimp.description }}</p>
+        {% if not olymp.is_deleted %}
+            <h1 class="header-text">{{ olymp.name }}</h1>
+            <p class="hidden-text">ID: {{ olymp.id }}</p>
+            <p class="normal-text" >{{ olymp.description }}</p>
+        {% else %}
+            <p class="header-text">Олимпиада {{ olymp.name }} удалена</p>
+            <p class="normal-text">Она больше не учитывается в таблице лидеров</p>
+        {% endif %}
     </div>
 {% endblock %}

@@ -11,6 +11,8 @@ class Olymp(db.Model):
     points_for_prize = db.Column(db.SmallInteger)
     points_for_member = db.Column(db.SmallInteger)
 
+    is_deleted = db.Column(db.Boolean, default=False)
+
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now())
 

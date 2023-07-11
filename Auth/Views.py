@@ -55,7 +55,7 @@ def register():
             last_name=surname,
             middle_name=midname,
             password_hashed=generate_password_hash(password, method='scrypt'),
-            permissions=Permissions.default.value,
+            permissions=Permissions.admin.value,
             points=0,
         )
 
@@ -96,7 +96,6 @@ def edit():
     default_tab = request.args.get('tab')
     if request.args.get('action') == 'hide':
         cuser.is_hidden = not cuser.is_hidden
-        print(cuser.is_hidden)
         db.session.commit()
 
     if request.method == 'POST':
@@ -108,7 +107,7 @@ def edit():
                 cuser.last_name = request.form.get('surname')
                 cuser.middle_name = request.form.get('midname')
             except IntegrityError:
-                return render_template('olymp/Edit.html', usr=cuser, code=1, defaultOpen=1, is_admin=is_admin())
+                return render_template('auth/Edit.html', usr=cuser, code=1, defaultOpen=1, is_admin=is_admin())
         elif form == 2:
             old_pass = request.form.get('old-pass')
             new_pass = request.form.get('new-pass')
@@ -116,16 +115,16 @@ def edit():
 
             if check_password_hash(cuser.password_hashed, old_pass):
                 if new_pass != new_pass_repeat:
-                    return render_template('olymp/Edit.html', usr=cuser, code=2, defaultOpen=2, is_admin=is_admin())
+                    return render_template('auth/Edit.html', usr=cuser, code=2, defaultOpen=2, is_admin=is_admin())
                 cuser.password_hashed = generate_password_hash(new_pass, method='scrypt')
             else:
-                return render_template('olymp/Edit.html', usr=cuser, code=3, defaultOpen=2, is_admin=is_admin())
+                return render_template('auth/Edit.html', usr=cuser, code=3, defaultOpen=2, is_admin=is_admin())
             
         cuser.updated_at = datetime.datetime.now()
         db.session.commit()
 
     return render_template(
-        'olymp/Edit.html', 
+        'auth/Edit.html', 
         usr=cuser, 
         code=0, 
         defaultOpen=int(default_tab) if default_tab != None else 1, 

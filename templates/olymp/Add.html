@@ -29,7 +29,7 @@
         } 
 
         function setToInput(name) {
-            var inputter = document.getElementById("olimp");
+            var inputter = document.getElementById("olymp");
             inputter.value = name;
         }
     </script>
@@ -59,13 +59,13 @@
                 <label class="danger">Данные об этой олимпиаде уже есть в ситеме</label>
             {% endif %}
 
-            <label for="olimp" class="text">Название олимпиады:</label>
+            <label for="olymp" class="text">Название олимпиады:</label>
             <div class="search-dropdown">
-                <input type="text" onclick="searchFunction()" placeholder="Введите название олимпиады" id="olimp" name="olimp" required>
+                <input type="text" onclick="searchFunction()" placeholder="Введите название олимпиады" id="olymp" name="olymp" required>
                 <div id="myDropdown" class="dropdown-content">
                     <input type="text" placeholder="Поиск.." id="myInput" onkeyup="filterFunction()">
-                    {% for olimp in olimps %}
-                        <p onclick="setToInput('{{ olimp.name }}')">{{ olimp.name }}</p>
+                    {% for olymp in olymps %}
+                        <p onclick="setToInput('{{ olymp.name }}')">{{ olymp.name }}</p>
                     {% endfor %}
                 </div>
             </div>

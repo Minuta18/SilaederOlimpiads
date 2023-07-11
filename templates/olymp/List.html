@@ -1,0 +1,41 @@
+{% extends "init/Base.html" %}
+
+{% block title %}Список олимпиад - Олимпиадник{% endblock %}
+
+{% block navbar %}
+    <div class="navbar">
+        <a href="/">Олимпиадник</a>
+        <a href="/add">Добавить олимпиаду</a>
+        <a href="/leaderboard">Таблица лидеров</a>
+        <a href="/admin" class="active">Панель администратора</a>
+        <a href="/user/{{ usr.id }}" style="float: right">Мой аккаунт</a>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="top-table">
+        <table>
+            <thead>
+                <tr>
+                    <td>Название олимпиады</td>
+                    <td>Дата регистрации</td>
+                    <td>Действия</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for olymp in olymps %}
+                    <tr>
+                        <td><a href="/olymp/{{ olymp.id }}/" class="accent">{{ olymp.name }} {% if olymp.is_deleted %} (удалено) {% endif %}</a></td>
+                        <td>{{ olymp.date }}</td>
+                        <td><a href="/olymp/{{ olymp.id }}/edit/" class="accent">Изменить</a>, {% if olymp.is_deleted %}
+                            <a href="/olymp/{{ olymp.id }}/delete/" class="accent">Восстановить</a>
+                        {% else %}
+                            <a href="/olymp/{{ olymp.id }}/delete/" class="accent">Удалить</a>
+                        {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

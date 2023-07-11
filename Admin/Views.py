@@ -1,3 +1,4 @@
+from datetime import datetime
 from functools import wraps
 from flask import Flask, render_template, request, redirect, abort
 from flask_login import login_user, login_required, logout_user, current_user
@@ -26,6 +27,62 @@ def admin_only(name):
 def admin_panel():
     return render_template('admin/Admin.html', usr=current_user)
 
+@app.route('/olymp/<olymp_id>/edit/', methods=['GET', 'POST'])
+@admin_only('edit_olymp')
+def edit_olymp(olymp_id):
+    olymp = Olymp.query.get(olymp_id)
+
+    if request.method == 'POST':
+        olymp.name =  request.form.get('name')
+        olymp.description = request.form.get('desc')
+        olymp.points_for_win = request.form.get('pfw')
+        olymp.points_for_prize = request.form.get('pfp')
+        olymp.points_for_member = request.form.get('pfm')
+        olymp.update_at = datetime.now()
+            
+        try:
+            db.session.add(olymp)
+            db.session.commit()
+        except IntegrityError:
+            db.session.rollback()
+            return render_template('admin/Add.html', code=1, usr=current_user, olymp=olymp)
+        return redirect('/admin/')
+    return render_template(
+        'admin/Add.html',
+        code=0,
+        usr=current_user,
+        olymp=olymp,
+    )
+
+@app.route('/olymp/<olymp_id>/delete/', methods=['GET'])
+@admin_only('delete_olymp')
+def delete_olymp(olymp_id):
+    olymp = Olymp.query.get(olymp_id)
+    olymp.is_deleted = not olymp.is_deleted
+
+    for usr_olymp in Usr_olymp.query.join(Olymp).filter(Olymp.name == olymp.name):
+        usr = User.query.get(usr_olymp.user_id)
+        if olymp.is_deleted:
+            if usr_olymp.place == 0:
+                usr.points -= olymp.points_for_win
+            elif usr_olymp.place == 1:
+                usr.points -= olymp.points_for_prize
+            elif usr_olymp.place == 2:
+                usr.points -= olymp.points_for_member
+        else:
+            if usr_olymp.place == 0:
+                usr.points += olymp.points_for_win
+            elif usr_olymp.place == 1:
+                usr.points += olymp.points_for_prize
+            elif usr_olymp.place == 2:
+                usr.points += olymp.points_for_member
+        db.session.add(usr)
+        
+    db.session.add(olymp)
+    db.session.commit()
+
+    return redirect('/admin/')
+
 @app.route('/admin/add/', methods=['GET', 'POST'])
 @admin_only('add_olymp')
 def add_olymp():
@@ -49,18 +106,25 @@ def add_olymp():
             db.session.commit()
         except IntegrityError:
             db.session.rollback()
-            return render_template('admin/Add.html', code=1, usr=current_user)
+            return render_template('admin/Add.html', code=1, usr=current_user, olymp=new_olymp)
 
         return redirect('/admin/')
-    return render_template('admin/Add.html', code=0, usr=current_user) # TODO
+    return render_template('admin/Add.html', code=0, usr=current_user, olymp=Olymp(
+        name='',
+        description='',
+        points_for_win=0,
+        points_for_prize=0,
+        points_for_member=0,
+    )) # TODO
 
-@app.route('/admin/olymp_list/', methods=['GET', 'POST'])
-@admin_only('list_olymps')
-def list_olymps(): # TODO: rewrite in C
-    olymps = Usr_olymp.query.all()
+@app.route('/admin/usr_olymp_list/', methods=['GET', 'POST'])
+@admin_only('list_usr_olymps')
+def list_usr_olymps(): # TODO: rewrite in C
+    olymps = Usr_olymp.query.join(Olymp).filter(~(Olymp.is_deleted))
     dicted_olymps = list()
     for olymp in olymps:
         Usr = User.query.get(olymp.user_id)
+        Olp = Olymp.query.get(olymp.olymp_id)
         place = ''
         if olymp.place == Place.winner.value:
             place = 'Победитель'
@@ -114,4 +178,19 @@ def list_olymps(): # TODO: rewrite in C
         'admin/List.html', 
         usr=current_user,
         olymps=dicted_olymps,
+    )
+
+@app.route('/admin/olymp_list/', methods=['GET', 'POST'])
+@admin_only('list_olymps')
+def list_olymps():
+    olymps = [{
+        'id': int(olymp.id),
+        'name': str(olymp.name),
+        'date': olymp.created_at.strftime('%Y.%m.%d'),
+        'is_deleted': bool(olymp.is_deleted),
+    } for olymp in Olymp.query.all()]
+    return render_template(
+        'olymp/List.html',
+        olymps=olymps,
+        usr=current_user,
     )

@@ -1,6 +1,6 @@
 {% extends "init/Base.html" %}
 
-{% block title %}{{ username }} - Олимпиадник{% endblock %}
+{% block title %}{{ username }}Таблица лидеров - Олимпиадник{% endblock %}
 
 {% block navbar %}
     {% if usr.is_authenticated %}
@@ -16,8 +16,8 @@
     {% else %}
         <div class="navbar">
             <a href="/">Олимпиадник</a>
-            <a href="/leaderboard">Таблица лидеров</a>
-            <a href="/login" style="float: right" class="active">Вход</a>
+            <a href="/leaderboard" class="active">Таблица лидеров</a>
+            <a href="/login" style="float: right">Вход</a>
             <a href="/register" style="float: right">Регистрация</a>
         </div>
     {% endif %}

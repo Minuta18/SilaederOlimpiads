@@ -58,11 +58,11 @@
                 </tr>
             </thead>
             <tbody>
-                {% for olimp in olimps %}
+                {% for olymp in olymps %}
                     <tr>
-                        <td><a href="/olimp/{{ olimp.id }}/" class="accent">{{ olimp.name }}</a>, {{ olimp.klass }} класс</td>
-                        <td><a href="/user/{{ olimp.user_id }}" class="accent">{{ olimp.user }}</a></td>
-                        <td>{{ olimp.place }}</td>
+                        <td><a href="/olymp/{{ olymp.id }}/" class="accent">{{ olymp.name }}</a>, {{ olymp.klass }} класс</td>
+                        <td><a href="/user/{{ olymp.user_id }}" class="accent">{{ olymp.user }}</a></td>
+                        <td>{{ olymp.place }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

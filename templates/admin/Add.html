@@ -15,18 +15,20 @@
 {% block content %}
 <div class="form-container">
     <form method="post">
-        <label><h1>Добавление олимпиады</h1></label>
+        <label><h1>Изменение олимпиады</h1></label>
         {% if code == 1 %}
-            <label class="danger">Олимпиада уже зарегестрирована</label>
+            <label class="danger">Олимпиада с этим именем уже существует</label>
         {% endif %}
         <label for="name">Название олимпиады:</label>
-        <input type="text" placeholder="Название" name="name" required>
-        <label for="name">Описание олимпиады:</label>
-        <textarea placeholder="Описание" name="desc" required></textarea>
-        <label for="name">Название олимпиады:</label>
-        <input type="number" placeholder="Очки за победу" name="pfw" required>
-        <input type="number" placeholder="Очки за призёрство" name="pfp" required>
-        <input type="number" placeholder="Очки за участие" name="pfm" required>
+        <input type="text" placeholder="Название" name="name" value="{{ olymp.name }}" required>
+        <label for="desc">Описание олимпиады:</label>
+        <textarea placeholder="Описание" name="desc" required>{{ olymp.description }}</textarea>
+        <label for="pfw">Очки за победу:</label>
+        <input type="number" placeholder="Очки за победу" name="pfw" value="{{ olymp.points_for_win }}" required>
+        <label for="pfw">Очки за призёрство:</label>
+        <input type="number" placeholder="Очки за призёрство" name="pfp" value="{{ olymp.points_for_prize }}" required>
+        <label for="pfw">Очки за участие:</label>
+        <input type="number" placeholder="Очки за участие" name="pfm" value="{{ olymp.points_for_member }}" required>
         <input type="submit" value="Добавить">
     </form>
 </div>
