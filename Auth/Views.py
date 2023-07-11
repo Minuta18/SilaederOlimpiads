@@ -1,7 +1,7 @@
 import datetime
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, abort, url_for
 from flask_login import login_user, login_required, logout_user, current_user
 from sqlalchemy.exc import IntegrityError
 from Init import db
@@ -19,7 +19,27 @@ def not_login_required(name):
         return wrapped
     return decorator
 
-@app.route('/login/', methods=['GET', 'POST'])
+@app.route('/user/<user_id>')
+def get_user(user_id):
+    user = User.query.get(user_id)
+    if not user:
+        abort(404)
+
+    if user.is_hidden:
+        if not (is_admin() or user.id == current_user.id):
+            abort(403)
+
+    username = f'{user.name} {user.last_name} {user.middle_name}' 
+
+    return render_template(
+        'init/User.html', 
+        username=username,
+        usr=current_user,
+        user=user,
+        is_admin=is_admin(),
+    )
+
+@app.route('/user/login/', methods=['GET', 'POST'])
 @not_login_required('login')
 def login():
     if request.method == 'POST':
@@ -35,10 +55,10 @@ def login():
             return render_template('auth/Login.html', code=2, email=email, password=passw)
 
         login_user(user)
-        return redirect('/')
+        return redirect(url_for('index'))
     return render_template('auth/Login.html', code=0, email='', password='')
 
-@app.route('/register/', methods=['GET', 'POST'])
+@app.route('/user/register/', methods=['GET', 'POST'])
 @not_login_required('registred')
 def register():
     if request.method == 'POST':
@@ -55,7 +75,7 @@ def register():
             last_name=surname,
             middle_name=midname,
             password_hashed=generate_password_hash(password, method='scrypt'),
-            permissions=Permissions.admin.value,
+            permissions=Permissions.dev.value,
             points=0,
         )
 
@@ -76,20 +96,20 @@ def register():
             return render_template('auth/Register.html', code=4, new_user=new_user)
         login_user(new_user)
 
-        return redirect('/')
+        return redirect(url_for('index'))
     return render_template('auth/Register.html', code=0, new_user=User(
         email='', name='', last_name='', middle_name='', 
         password_hashed='', permissions=Permissions.default.value,
     ))
 
-@app.route('/logout/', methods=['GET'])
+@app.route('/user/logout/', methods=['GET'])
 @login_required
 def logout():
     logout_user()
 
-    return redirect('/')
+    return redirect(url_for('/'))
 
-@app.route('/edit/', methods=['GET', 'POST'])
+@app.route('/user/edit/', methods=['GET', 'POST'])
 @login_required
 def edit():
     cuser = User.query.get(current_user.id)

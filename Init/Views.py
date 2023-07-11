@@ -8,26 +8,6 @@ from . import app
 def index():
     return render_template('init/Index.html', usr=current_user, is_admin=is_admin())
 
-@app.route('/user/<user_id>')
-def user(user_id):
-    user = User.query.get(user_id)
-    if not user:
-        abort(404)
-
-    if user.is_hidden:
-        if not (is_admin() or user.id == current_user.id):
-            abort(403)
-
-    username = f'{user.name} {user.last_name} {user.middle_name}' 
-
-    return render_template(
-        'init/User.html', 
-        username=username,
-        usr=current_user,
-        user=user,
-        is_admin=is_admin(),
-    )
-
 @app.route('/leaderboard/')
 def leaderboard():
     users = list()

@@ -4,10 +4,10 @@
 
 {% block navbar %}
     <div class="navbar">
-        <a href="/">Олимпиадник</a>
-        <a href="/leaderboard">Таблица лидеров</a>
-        <a href="/login" style="float: right" class="active">Вход</a>
-        <a href="/register" style="float: right">Регистрация</a>
+        <a href={{ url_for('index') }}>Олимпиадник</a>
+        <a href={{ url_for('leaderboard') }}>Таблица лидеров</a>
+        <a href={{ url_for('login') }} style="float: right" class="active">Вход</a>
+        <a href={{ url_for('register') }} style="float: right">Регистрация</a>
     </div>
 {% endblock %}
 

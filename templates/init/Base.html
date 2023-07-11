@@ -17,10 +17,13 @@
     <body>
         {% block navbar %}
             <div class="navbar">
-                <a href="/">Олимпиадник</a>
-                <a href="/add">Добавить олимпиаду</a>
-                <a href="/leaderboard">Таблица лидеров</a>
-                <a href="/user/" style="float: right" class="active">Мой аккаунт</a>
+                <a href={{ url_for('index') }}>Олимпиадник</a>
+                <a href={{ url_for('register_olymp') }}>Добавить олимпиаду</a>
+                <a href={{ url_for('leaderboard') }}>Таблица лидеров</a>
+                {% if is_admin %}
+                    <a href={{ url_for('admin_panel') }}>Панель администратора</a>
+                {% endif %}
+                <a href={{ url_for('get_user', user_id=usr.id) }} class="active" style="float: right">Мой аккаунт</a>
             </div>
         {% endblock %}
 
@@ -35,7 +38,7 @@
         </div>
         
         <div class="footer">
-            <p class="text">Олимпиадник v1.0.6 by 5&6</p>
+            <p class="text">Олимпиадник v1.0.7 by 5&6</p>
         </div>
     </body>
 </html>
