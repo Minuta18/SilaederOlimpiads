@@ -7,7 +7,7 @@ from Init import app, db
 from .Models import Olymp
 from Olymp.Models import Usr_olymp
 from Olymp.Place import Place
-from Auth.Permissions import Permissions, is_admin
+from Auth.Permissions import Permissions, is_admin, is_banned
 from Auth import User
 
 def admin_only(name):
@@ -22,13 +22,26 @@ def admin_only(name):
         return wrapped
     return decorator
 
+def not_banned(name):
+    def decorator(func):
+        @wraps(func)
+        def wrapped(*args, **kwargs):
+            if current_user.is_authenticated():
+                if is_banned():
+                    return redirect(url_for('got_banned'))
+            return func(*args, **kwargs)
+        return wrapped
+    return decorator
+
 @app.route('/admin/', methods=['GET', 'POST'])
 @admin_only('admin_panel')
+@not_banned('admin_panel')
 def admin_panel():
     return render_template('admin/Admin.html', usr=current_user)
 
 @app.route('/admin/usr_olymp_list/', methods=['GET', 'POST'])
 @admin_only('list_usr_olymps')
+@not_banned('list_usr_olymps')
 def list_usr_olymps(): # TODO: rewrite in C
     olymps = Usr_olymp.query.join(Olymp).filter(~(Olymp.is_deleted))
     dicted_olymps = list()
@@ -92,6 +105,7 @@ def list_usr_olymps(): # TODO: rewrite in C
 
 @app.route('/admin/olymp_list/', methods=['GET', 'POST'])
 @admin_only('list_olymps')
+@not_banned('list_olymps')
 def list_olymps():
     olymps = [{
         'id': int(olymp.id),
@@ -106,14 +120,16 @@ def list_olymps():
     )
 
 @app.route('/admin/usr_list/', methods=['GET', 'POST'])
-@admin_only('usr_lists')
-def usr_lists():
+@admin_only('usr_list')
+@not_banned('usr_list')
+def usr_list():
     users = [{
         'id': usr.id,
         'email': usr.email,
         'name': f'{usr.name} {usr.last_name} {usr.middle_name}',
         'date': usr.updated_at,
-        'status': (f'Забанен до { usr.banned_before }' if usr.is_banned else 'Всё нормально'),
+        'status': (f'Забанен' if usr.is_banned else 'Всё нормально'),
+        'banned': usr.is_banned,
         'points': usr.points,
     } for usr in User.query.all()]
     return render_template(

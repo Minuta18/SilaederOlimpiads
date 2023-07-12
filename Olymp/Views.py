@@ -1,7 +1,7 @@
 from datetime import date, datetime
 from .Models import Usr_olymp
 from Admin.Models import Olymp
-from Admin.Views import admin_only
+from Admin.Views import admin_only, not_banned
 from Auth.Models import User 
 from Auth.Permissions import is_admin
 from .Place import Place
@@ -12,6 +12,7 @@ from sqlalchemy.exc import IntegrityError, PendingRollbackError
 
 @app.route('/olymp/add/', methods=['GET', 'POST'])
 @login_required
+@not_banned('add_olymp')
 def add_olymp():
     if request.method == 'POST':
         olymp = request.form.get('olymp')
@@ -62,7 +63,8 @@ def olymp(olymp_id):
     return render_template('olymp/Olymp.html', olymp=olymp, usr=current_user, is_admin=is_admin())
 
 @app.route('/olymp/register', methods=['GET', 'POST'])
-@admin_only('add_olymp')
+@admin_only('reqister_olymp')
+@not_banned('register_olymp')
 def register_olymp():
     if request.method == 'POST':
         name = request.form.get('name')
@@ -97,6 +99,7 @@ def register_olymp():
 
 @app.route('/olymp/<olymp_id>/edit/', methods=['GET', 'POST'])
 @admin_only('edit_olymp')
+@not_banned('edit_olymp')
 def edit_olymp(olymp_id):
     olymp = Olymp.query.get(olymp_id)
 
@@ -124,6 +127,7 @@ def edit_olymp(olymp_id):
 
 @app.route('/olymp/<olymp_id>/delete/', methods=['GET'])
 @admin_only('delete_olymp')
+@not_banned('delete_olymp')
 def delete_olymp(olymp_id):
     olymp = Olymp.query.get(olymp_id)
     olymp.is_deleted = not olymp.is_deleted

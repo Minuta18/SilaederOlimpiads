@@ -1,0 +1,22 @@
+{% extends "init/Base.html" %}
+
+{% block title %}Добавление олимпиады - Олимпиадник{% endblock %}
+
+{% block navbar %}
+    <div class="navbar">
+        <a href={{ url_for('index') }}>Олимпиадник</a>
+        <a href={{ url_for('add_olymp') }}>Добавить олимпиаду</a>
+        <a href={{ url_for('leaderboard') }}>Таблица лидеров</a>
+        <a href={{ url_for('admin_panel') }} class="active">Панель администратора</a>
+        <a href={{ url_for('get_user', user_id=usr.id) }} style="float: right">Мой аккаунт</a>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <form method="post">
+        <label><h1>Вы уверены в этом?</h1></label>
+        <input type="submit" value="Да">
+    </form>
+</div>
+{% endblock %}

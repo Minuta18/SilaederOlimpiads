@@ -9,7 +9,8 @@ from .Models import User
 from Admin.Models import Olymp
 from Olymp.Models import get_place, Usr_olymp
 from Init import app
-from .Permissions import Permissions, is_admin
+from Admin.Views import admin_only, not_banned
+from .Permissions import Permissions, is_admin, is_banned
 
 def not_login_required(name):
     def decorator(func):
@@ -84,7 +85,7 @@ def register():
             last_name=surname,
             middle_name=midname,
             password_hashed=generate_password_hash(password, method='scrypt'),
-            permissions=Permissions.dev.value,
+            permissions=Permissions.default.value,
             points=0,
         )
 
@@ -116,7 +117,7 @@ def register():
 def logout():
     logout_user()
 
-    return redirect(url_for('/'))
+    return redirect(url_for('index'))
 
 @app.route('/user/edit/', methods=['GET', 'POST'])
 @login_required
@@ -159,3 +160,29 @@ def edit():
         defaultOpen=int(default_tab) if default_tab != None else 1, 
         is_admin=is_admin()
     )
+
+@app.route('/user/<user_id>/ban/', methods=['POST', 'GET'])
+@admin_only('ban_user')
+@not_banned('ban_user')
+def ban_user(user_id):
+    usr = User.query.get(user_id)
+
+    if usr.is_banned:
+        usr.is_banned = False
+        db.session.add(usr)
+        db.session.commit()
+
+        return redirect(url_for('usr_list'))
+    
+    if request.method == 'POST':
+        usr.is_banned = True
+        db.session.add(usr)
+        db.session.commit()
+        
+        return redirect(url_for('usr_list'))
+
+    return render_template('auth/Ban.html', usr=current_user, )
+
+@app.route('/banned/', methods=['POST', 'GET'])
+def got_banned():
+    return render_template('auth/GotBanned.html', usr=current_user, )

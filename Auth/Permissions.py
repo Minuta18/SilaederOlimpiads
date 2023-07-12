@@ -13,3 +13,6 @@ def is_admin():
         elif current_user.permissions == Permissions.dev.value:
             return True
     return False
+
+def is_banned():
+    return current_user.is_banned

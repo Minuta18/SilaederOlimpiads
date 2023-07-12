@@ -5,18 +5,18 @@
 {% block navbar %}
     {% if usr.is_authenticated %}
         <div class="navbar">
-            <a href={{ url_for('index') }}>Олимпиадник</a>
+            <a href={{ url_for('index') }} class="active">Олимпиадник</a>
             <a href={{ url_for('add_olymp') }}>Добавить олимпиаду</a>
             <a href={{ url_for('leaderboard') }}>Таблица лидеров</a>
             {% if is_admin %}
-                <a href={{ url_for('admin_panel') }} class="active">Панель администратора</a>
+                <a href={{ url_for('admin_panel') }}>Панель администратора</a>
             {% endif %}
             <a href={{ url_for('get_user', user_id=usr.id) }} style="float: right">Мой аккаунт</a>
         </div>
     {% else %}
         <div class="navbar">
-            <a href={{ url_for('index') }}>Олимпиадник</a>
-            <a href={{ url_for('leaderboard') }} class="active">Таблица лидеров</a>
+            <a href={{ url_for('index') }} class="active">Олимпиадник</a>
+            <a href={{ url_for('leaderboard') }}>Таблица лидеров</a>
             <a href={{ url_for('login') }} style="float: right">Вход</a>
             <a href={{ url_for('register') }} style="float: right">Регистрация</a>
         </div>

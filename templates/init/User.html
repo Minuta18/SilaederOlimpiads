@@ -28,6 +28,7 @@
         <h1 class="header-text">{{ username }} 
             {% if user.permissions == 1 %}(Администратор){% endif %} 
             {% if user.permissions == 2 %}(Разработчик){% endif %}
+            {% if user.is_banned %}(Забанен){% endif %}
         </h1>
         <p class="hidden-text">ID: {{ user.id }}</p>
         <p class="normal-text" style="margin-left: 10%; margin-right: 10%;">Почта: {{ user.email }}</p>
