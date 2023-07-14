@@ -26,7 +26,7 @@ def not_banned(name):
     def decorator(func):
         @wraps(func)
         def wrapped(*args, **kwargs):
-            if current_user.is_authenticated():
+            if current_user.is_authenticated:
                 if is_banned():
                     return redirect(url_for('got_banned'))
             return func(*args, **kwargs)

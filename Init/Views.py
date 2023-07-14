@@ -11,7 +11,9 @@ def index():
 @app.route('/leaderboard/')
 def leaderboard():
     users = list()
-    for ind, user in enumerate(User.query.order_by(User.points.desc()).limit(15).all()):
+    for ind, user in enumerate(User.query.filter(
+        (not User.is_hidden) and (not User.is_banned)
+    ).order_by(User.points.desc()).limit(15).all()):
         users.append({
             'place': ind + 1,
             'name': f'{user.name} {user.last_name} {user.middle_name}',

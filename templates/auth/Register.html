@@ -24,6 +24,9 @@
         {% if code == 4 %}
             <label class="danger">Почта уже занята</label>
         {% endif %}
+        {% if code == 5 %}
+            <label class="danger">Почта не корректна. Проверьте, что вы написали её правильно</label>
+        {% endif %}
         <label for="email" class="text">Почта:</label>
         <input type="text" placeholder="Введите почту" name="email" value="{{ new_user.email }}" required>
         <label for="name" class="text">ФИО:</label>

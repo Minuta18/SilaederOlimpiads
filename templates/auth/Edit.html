@@ -47,6 +47,13 @@
             <form method="post" action="?form=1">
                 <label><h1 class="header-text">Основные настройки</h1></label>
 
+                {% if code == 1 %}
+                    <label class="danger">Почта уже занята</label>
+                {% endif %}
+                {% if code == 4 %}
+                    <label class="danger">Почта не корректна. Проверьте, что вы написали её правильно</label>
+                {% endif %}
+
                 <label for="olymp" class="text" style="margin-top: 16px;">Почта:</label>
                 <input type="text" placeholder="Введите почту" name="email" value="{{ usr.email }}" required>
                 <label for="olymp" class="text" style="margin-top: 16px;">ФИО:</label>
@@ -60,6 +67,11 @@
         <div id="Security" class="tabcontent">
             <form method="post" action="?form=2">
                 <label><h1 class="header-text">Безопасность</h1></label>
+                
+                {% if code == 2 or code == 3 %}
+                    <label class="danger">Пароли не совпадают</label>
+                {% endif %}
+                
                 <input type="password" style="margin-top: 4px !important" placeholder="Старый пароль" name="old-pass" required>  
                 <input type="password" style="margin-top: 4px !important" placeholder="Новый пароль" name="new-pass" required>
                 <input type="password" style="margin-top: 4px !important" placeholder="Повторение пароля" name="new-pass-repeat" required>

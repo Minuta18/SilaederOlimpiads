@@ -1,8 +1,10 @@
 import datetime
+import re
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import Flask, render_template, request, redirect, abort, url_for
 from flask_login import login_user, login_required, logout_user, current_user
+from flask_mail import Message
 from sqlalchemy.exc import IntegrityError
 from Init import db
 from .Models import User
@@ -21,6 +23,12 @@ def not_login_required(name):
             return func(*args, **kwargs)
         return wrapped
     return decorator
+
+def check_email(email: str) -> bool:
+    return not re.fullmatch(
+        re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+'), 
+        email,  
+    ) == None
 
 @app.route('/user/<user_id>')
 def get_user(user_id):
@@ -89,6 +97,9 @@ def register():
             points=0,
         )
 
+        if not check_email(email):
+            return render_template('auth/Register.html', code=5, new_user=new_user) 
+
         if not request.form.get('accept'):
             return render_template('auth/Register.html', code=3, new_user=new_user) 
 
@@ -133,6 +144,9 @@ def edit():
         if form == 1:
             try:
                 cuser.email = request.form.get('email')    
+                if not check_email(cuser.email):
+                    return render_template('auth/Register.html', code=4, new_user=cuser) 
+
                 cuser.name = request.form.get('name')
                 cuser.last_name = request.form.get('surname')
                 cuser.middle_name = request.form.get('midname')
@@ -167,6 +181,10 @@ def edit():
 def ban_user(user_id):
     usr = User.query.get(user_id)
 
+    if usr.permissions == Permissions.dev.value() and \
+        current_user.permissions == Permissions.admin.value():
+        abort(403)
+
     if usr.is_banned:
         usr.is_banned = False
         db.session.add(usr)
@@ -186,3 +204,36 @@ def ban_user(user_id):
 @app.route('/banned/', methods=['POST', 'GET'])
 def got_banned():
     return render_template('auth/GotBanned.html', usr=current_user, )
+
+# @app.route('/recovery/', methods=['GET', 'POST'])
+# @login_required
+# def recovery():
+#     try:
+#         step = int(request.args.get('step'))
+#         if step == None:
+#             step = 1
+#     except ValueError as e:
+#         step = 1
+#     except TypeError as e:
+#         step = 1
+
+#     if step == 1:
+#         if request.method == 'POST':
+#             email = request.form.get('email')
+        
+#             usr = User.query.filter(User.email == email).first()
+#             if usr == None:
+#                 return render_template('auth/Recovery1.html', usr=current_user, code=2)
+
+#             msg = Message(
+#                 'Сброс пароля',
+#                 recipients=[email, ]
+#             )
+#             msg.html = '<b>Тестируем</b>'
+#             mail.send(msg)
+
+#             return redirect(url_for('recovery', step=2))
+
+#         return render_template('auth/Recovery1.html', usr=current_user, code=1)
+#     elif step == 2:
+#         return render_template('auth/Recovery2.html', usr=current_user, code=1)

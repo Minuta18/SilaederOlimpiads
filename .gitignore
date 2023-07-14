@@ -161,3 +161,6 @@ cython_debug/
 
 # Test databases
 app.db
+
+# Secret keys
+config.py

@@ -1,0 +1,31 @@
+{% extends "init/Base.html" %}
+
+{% block title %}Восстановление пароля - Олимпиадник{% endblock %}
+
+{% block navbar %}
+    {% if usr.is_authenticated %}
+        <div class="navbar">
+            <a href={{ url_for('index') }}>Олимпиадник</a>
+            <a href={{ url_for('add_olymp') }}>Добавить олимпиаду</a>
+            <a href={{ url_for('leaderboard') }}>Таблица лидеров</a>
+            {% if is_admin %}
+                <a href={{ url_for('admin_panel') }}>Панель администратора</a>
+            {% endif %}
+            <a href={{ url_for('get_user', user_id=usr.id) }} style="float: right">Мой аккаунт</a>
+        </div>
+    {% else %}
+        <div class="navbar">
+            <a href={{ url_for('index') }}>Олимпиадник</a>
+            <a href={{ url_for('leaderboard') }}>Таблица лидеров</a>
+            <a href={{ url_for('login') }} style="float: right">Вход</a>
+            <a href={{ url_for('register') }} style="float: right">Регистрация</a>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="centered-container">
+    <p class="text"><span class="header-text">Сброс пароля</span></p>
+    <p class="text">Мы выслали ссылку на восстановление пароля на вашу почту</p>
+</div>
+{% endblock %}
