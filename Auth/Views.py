@@ -181,8 +181,8 @@ def edit():
 def ban_user(user_id):
     usr = User.query.get(user_id)
 
-    if usr.permissions == Permissions.dev.value() and \
-        current_user.permissions == Permissions.admin.value():
+    if usr.permissions == Permissions.dev.value and \
+        current_user.permissions == Permissions.admin.value:
         abort(403)
 
     if usr.is_banned:

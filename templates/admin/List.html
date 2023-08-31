@@ -60,7 +60,7 @@
             <tbody>
                 {% for olymp in olymps %}
                     <tr>
-                        <td><a href="{{ url_for('olymp', olymp_id={{ olymp.id }}) }}" class="accent">{{ olymp.name }}</a>, {{ olymp.klass }} класс</td>
+                        <td><a href="{{ url_for('olymp', olymp_id=olymp.id) }}" class="accent">{{ olymp.name }}</a>, {{ olymp.klass }} класс</td>
                         <td><a href="{{ url_for('get_user', user_id=olymp.user_id) }}" class="accent">{{ olymp.user }}</a></td>
                         <td>{{ olymp.place }}</td>
                     </tr>
