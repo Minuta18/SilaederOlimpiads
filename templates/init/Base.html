@@ -17,13 +17,13 @@
     <body>
         {% block navbar %}
             <div class="navbar">
-                <a href={{ url_for('index') }}>Олимпиадник</a>
-                <a href={{ url_for('add_olymp') }}>Добавить олимпиаду</a>
-                <a href={{ url_for('leaderboard') }}>Таблица лидеров</a>
+                <a href="{{ url_for('index') }}">Олимпиадник</a>
+                <a href="{{ url_for('add_olymp') }}">Добавить олимпиаду</a>
+                <a href="{{ url_for('leaderboard') }}">Таблица лидеров</a>
                 {% if is_admin %}
-                    <a href={{ url_for('admin_panel') }}>Панель администратора</a>
+                    <a href="{{ url_for('admin_panel') }}">Панель администратора</a>
                 {% endif %}
-                <a href={{ url_for('get_user', user_id=usr.id) }} class="active" style="float: right">Мой аккаунт</a>
+                <a href="{{ url_for('get_user', user_id=usr.id) }}" class="active" style="float: right">Мой аккаунт</a>
             </div>
         {% endblock %}
 
