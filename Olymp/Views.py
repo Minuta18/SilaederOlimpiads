@@ -63,7 +63,7 @@ def olymp(olymp_id):
     return render_template('olymp/Olymp.html', olymp=olymp, usr=current_user, is_admin=is_admin())
 
 @app.route('/olymp/register', methods=['GET', 'POST'])
-@admin_only('reqister_olymp')
+@admin_only('register_olymp')
 @not_banned('register_olymp')
 def register_olymp():
     if request.method == 'POST':

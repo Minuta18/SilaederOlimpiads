@@ -45,13 +45,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for olymp in writed_olymps %}
+                    {% for olymp in written_olymps %}
                         <tr>
                             <td class="text">{{ olymp.name }}</td>
                             <td class="text">{{ olymp.place }}</td>
                         </tr>
                     {% endfor %}
-                    {% if len_writed_olymps == 0 %}
+                    {% if len_written_olymps == 0 %}
                         <tr>
                             <td class="text">Пользователь не написал ни одной олимпиады</td>
                             <td class="text"></td>

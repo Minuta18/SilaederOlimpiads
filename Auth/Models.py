@@ -1,5 +1,4 @@
 import datetime
-
 from Init import db
 from flask_login import UserMixin
 

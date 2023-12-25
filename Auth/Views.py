@@ -41,7 +41,7 @@ def get_user(user_id):
             abort(403)
 
     username = f'{user.name} {user.last_name} {user.middle_name}' 
-    writed_olymps = [{
+    written_olymps = [{
         'id': int(olymp.id),
         'name': f'{str(Olymp.query.get(olymp.olymp_id).name)}, {int(olymp.olymp_klass)} класс',
         'place': get_place(olymp.place),
@@ -52,8 +52,8 @@ def get_user(user_id):
         username=username,
         usr=current_user,
         user=user,
-        writed_olymps=writed_olymps,
-        len_writed_olymps=len(writed_olymps),
+        written_olymps=written_olymps,
+        len_written_olymps=len(written_olymps),
         is_admin=is_admin(),
     )
 
@@ -62,23 +62,24 @@ def get_user(user_id):
 def login():
     if request.method == 'POST':
         email = request.form.get('email')
-        passw = request.form.get('password')
+        password = request.form.get('password')
 
         user = User.query.filter_by(email=email).first()
 
         if user == None:
-            return render_template('auth/Login.html', code=1, email=email, password=passw)
+            return render_template('auth/Login.html', code=1, email=email, password=password)
         
-        if not check_password_hash(user.password_hashed, passw):
-            return render_template('auth/Login.html', code=2, email=email, password=passw)
+        if not check_password_hash(user.password_hashed, password):
+            return render_template('auth/Login.html', code=2, email=email, password=password)
 
         login_user(user)
         return redirect(url_for('index'))
     return render_template('auth/Login.html', code=0, email='', password='')
 
 @app.route('/user/register/', methods=['GET', 'POST'])
-@not_login_required('registred')
+@not_login_required('register')
 def register():
+    #! THIS IS A DEPRECATED METHOD 
     if request.method == 'POST':
         email = request.form.get('email')
         name = request.form.get('name')
@@ -205,35 +206,3 @@ def ban_user(user_id):
 def got_banned():
     return render_template('auth/GotBanned.html', usr=current_user, )
 
-# @app.route('/recovery/', methods=['GET', 'POST'])
-# @login_required
-# def recovery():
-#     try:
-#         step = int(request.args.get('step'))
-#         if step == None:
-#             step = 1
-#     except ValueError as e:
-#         step = 1
-#     except TypeError as e:
-#         step = 1
-
-#     if step == 1:
-#         if request.method == 'POST':
-#             email = request.form.get('email')
-        
-#             usr = User.query.filter(User.email == email).first()
-#             if usr == None:
-#                 return render_template('auth/Recovery1.html', usr=current_user, code=2)
-
-#             msg = Message(
-#                 'Сброс пароля',
-#                 recipients=[email, ]
-#             )
-#             msg.html = '<b>Тестируем</b>'
-#             mail.send(msg)
-
-#             return redirect(url_for('recovery', step=2))
-
-#         return render_template('auth/Recovery1.html', usr=current_user, code=1)
-#     elif step == 2:
-#         return render_template('auth/Recovery2.html', usr=current_user, code=1)

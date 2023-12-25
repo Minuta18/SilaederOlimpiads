@@ -44,7 +44,7 @@ def admin_panel():
 @not_banned('list_usr_olymps')
 def list_usr_olymps(): # TODO: rewrite in C
     olymps = Usr_olymp.query.join(Olymp).filter(~(Olymp.is_deleted))
-    dicted_olymps = list()
+    dict_olymps = list()
     for olymp in olymps:
         Usr = User.query.get(olymp.user_id)
         Olp = Olymp.query.get(olymp.olymp_id)
@@ -55,7 +55,7 @@ def list_usr_olymps(): # TODO: rewrite in C
             place = 'Призёр'
         else:
             place = 'Участник'
-        dicted_olymps.append({
+        dict_olymps.append({
             'id': int(olymp.olymp_id),
             'name': str(Olymp.query.get(olymp.olymp_id).name),
             'klass': int(olymp.olymp_klass),
@@ -67,40 +67,40 @@ def list_usr_olymps(): # TODO: rewrite in C
     if request.method == 'POST':
         if request.form.get('usr_name') != '':
             name = request.form.get('usr_name').lower()
-            dicted_olymps = [olymp for olymp in dicted_olymps if name.lower() in olymp['user'].lower()]
+            dict_olymps = [olymp for olymp in dict_olymps if name.lower() in olymp['user'].lower()]
         if request.form.get('oli_name') != '':
             oli = request.form.get('oli_name').lower()
-            dicted_olymps = [olymp for olymp in dicted_olymps if oli.lower() in olymp['name'].lower()]
+            dict_olymps = [olymp for olymp in dict_olymps if oli.lower() in olymp['name'].lower()]
         if request.form.get('oli_klass') != '':
             kls = request.form.get('oli_klass').lower()
-            dicted_olymps = [olymp for olymp in dicted_olymps if int(kls) == olymp['klass']]
+            dict_olymps = [olymp for olymp in dict_olymps if int(kls) == olymp['klass']]
         if request.form.get('filtering') != 0:
             val = int(request.form.get('filtering'))
             if val == 1:
-                dicted_olymps = [olymp for olymp in dicted_olymps if olymp['place'] == 'Победитель']
+                dict_olymps = [olymp for olymp in dict_olymps if olymp['place'] == 'Победитель']
             elif val == 2:
-                dicted_olymps = [olymp for olymp in dicted_olymps if olymp['place'] == 'Призёр']
+                dict_olymps = [olymp for olymp in dict_olymps if olymp['place'] == 'Призёр']
             elif val == 3:
-                dicted_olymps = [olymp for olymp in dicted_olymps if olymp['place'] == 'Участник']
+                dict_olymps = [olymp for olymp in dict_olymps if olymp['place'] == 'Участник']
         if request.form.get('sorting1') != '0':
             if request.form.get('sorting1') == '1':
-                dicted_olymps.sort(key=lambda olymp: olymp['user'])
+                dict_olymps.sort(key=lambda olymp: olymp['user'])
             else:
-                dicted_olymps.sort(key=lambda olymp: olymp['user'], reverse=True)
+                dict_olymps.sort(key=lambda olymp: olymp['user'], reverse=True)
         elif request.form.get('sorting2') != '0':
             if request.form.get('sorting2') == '1':
-                dicted_olymps.sort(key=lambda olymp: olymp['place'])
+                dict_olymps.sort(key=lambda olymp: olymp['place'])
             else:
-                dicted_olymps.sort(key=lambda olymp: olymp['place'], reverse=True)
+                dict_olymps.sort(key=lambda olymp: olymp['place'], reverse=True)
         elif request.form.get('sorting3') != '0':
             if request.form.get('sorting3') == '1':
-                dicted_olymps.sort(key=lambda olymp: olymp['klass'])
+                dict_olymps.sort(key=lambda olymp: olymp['klass'])
             else:
-                dicted_olymps.sort(key=lambda olymp: olymp['klass'], reverse=True)
+                dict_olymps.sort(key=lambda olymp: olymp['klass'], reverse=True)
     return render_template(
         'admin/List.html', 
         usr=current_user,
-        olymps=dicted_olymps,
+        olymps=dict_olymps,
     )
 
 @app.route('/admin/olymp_list/', methods=['GET', 'POST'])
