@@ -3,12 +3,12 @@ from functools import wraps
 from flask import Flask, render_template, request, redirect, abort, url_for
 from flask_login import login_user, login_required, logout_user, current_user
 from sqlalchemy.exc import IntegrityError, PendingRollbackError
-from Init import app, db
-from .Models import Olymp
-from Olymp.Models import Usr_olymp
-from Olymp.Place import Place
-from Auth.Permissions import Permissions, is_admin, is_banned
-from Auth import User
+from init import app, db
+from .models import Olymp
+from olymp.models import Usr_olymp
+from olymp.place import Place
+from auth.permissions import Permissions, is_admin, is_banned
+from auth import User
 
 def admin_only(name):
     def decorator(func):

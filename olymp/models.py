@@ -1,5 +1,5 @@
 import datetime
-from Init import db
+from init import db
 
 class Usr_olymp(db.Model):
     __tablename__ = 'usr_olymp'

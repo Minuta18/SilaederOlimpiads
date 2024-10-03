@@ -1,11 +1,11 @@
 from datetime import date, datetime
-from .Models import Usr_olymp
-from Admin.Models import Olymp
-from Admin.Views import admin_only, not_banned
-from Auth.Models import User 
-from Auth.Permissions import is_admin
-from .Place import Place
-from Init import app, db
+from .models import Usr_olymp
+from admin.models import Olymp
+from admin.views import admin_only, not_banned
+from auth.models import User 
+from auth.permissions import is_admin
+from .place import Place
+from init import app, db
 from flask_login import login_required, current_user
 from flask import Flask, render_template, request, redirect, abort, url_for
 from sqlalchemy.exc import IntegrityError, PendingRollbackError

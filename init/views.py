@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, abort
 from flask_login import login_user, login_required, logout_user, current_user
-from Auth import User
-from Auth.Permissions import is_admin
+from auth import User
+from auth.permissions import is_admin
 from . import app
 
 @app.route('/')

@@ -1,8 +1,8 @@
-from Init import db, app
-from Init import Views
-from Admin import Views
-from Olymp import Views
-import Auth
+from init import db, app
+from init import views
+from admin import views
+from olymp import views
+import auth
 
 with app.app_context():
     db.create_all()  

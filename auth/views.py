@@ -6,13 +6,13 @@ from flask import Flask, render_template, request, redirect, abort, url_for
 from flask_login import login_user, login_required, logout_user, current_user
 from flask_mail import Message
 from sqlalchemy.exc import IntegrityError
-from Init import db
-from .Models import User
-from Admin.Models import Olymp
-from Olymp.Models import get_place, Usr_olymp
-from Init import app
-from Admin.Views import admin_only, not_banned
-from .Permissions import Permissions, is_admin, is_banned
+from init import db
+from .models import User
+from admin.models import Olymp
+from olymp.models import get_place, Usr_olymp
+from init import app
+from admin.views import admin_only, not_banned
+from .permissions import Permissions, is_admin, is_banned
 
 def not_login_required(name):
     def decorator(func):
